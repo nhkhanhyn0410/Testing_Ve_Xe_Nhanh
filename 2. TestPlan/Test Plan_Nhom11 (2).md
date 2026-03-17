@@ -362,33 +362,32 @@ Documentation</td>
 |         |                |                                                                          |                      |
 |---------|----------------|--------------------------------------------------------------------------|----------------------|
 | **STT** | **Độ ưu tiên** | **Nội dung**                                                             | **Loại test**        |
-| 1       | 1              | Đăng ký/Đăng nhập Customer (email, Google, Facebook)                     | Functional, E2E      |
+| 1       | 1              | Đăng ký/Đăng nhập Customer (email)                                      | Functional, E2E      |
 | 2       | 1              | Tìm kiếm chuyến xe + lọc/sắp xếp                                        | Functional, GUI      |
 | 3       | 1              | Xem chi tiết chuyến + sơ đồ ghế real-time                               | Functional, GUI      |
 | 4       | 1              | Đặt vé (chọn ghế, nhập thông tin hành khách, áp dụng voucher)           | Functional, E2E      |
 | 5       | 1              | Thanh toán (VNPay/Tiền mặt)                                             | Functional, E2E      |
-| 6       | 1              | Nhận vé điện tử QR qua Email                                            | Functional           |
-| 7       | 1              | Tra cứu vé & xác thực OTP (Guest)                                       | Functional, E2E      |
-| 8       | 2              | Hủy vé / Đổi vé + hoàn tiền                                             | Functional, E2E      |
-| 9       | 2              | Đánh giá chuyến đi (tạo, xem, báo cáo review)                           | Functional           |
-| 10      | 2              | Khiếu nại (tạo, theo dõi, đánh giá mức độ hài lòng)                     | Functional           |
-| 11      | 2              | Quản lý hồ sơ cá nhân (cập nhật thông tin, đổi mật khẩu, avatar)        | Functional           |
-| 12      | 2              | Tích điểm thưởng (xem điểm, lịch sử, đổi điểm)                         | Functional           |
-| 13      | 2              | Operator: Đăng ký/Đăng nhập nhà xe                                      | Functional, E2E      |
-| 14      | 2              | Operator: Quản lý tuyến đường (CRUD, điểm đón/trả)                      | Functional           |
-| 15      | 2              | Operator: Quản lý xe (CRUD, trạng thái)                                 | Functional           |
-| 16      | 2              | Operator: Quản lý nhân viên (CRUD, phân quyền)                          | Functional           |
-| 17      | 2              | Operator: Quản lý lịch trình chuyến xe (tạo, chuyến lặp lại, giá động) | Functional           |
-| 18      | 2              | Operator: Quản lý voucher (CRUD, kích hoạt/vô hiệu)                    | Functional           |
-| 19      | 2              | Operator: Xem báo cáo doanh thu và thống kê                             | Functional, GUI      |
-| 20      | 3              | Trip Manager: Đăng nhập                                                  | Functional           |
-| 21      | 3              | Trip Manager: Quét QR xác thực vé + check-in hành khách                 | Functional, E2E      |
-| 22      | 3              | Trip Manager: Cập nhật trạng thái chuyến (bắt đầu/hoàn thành)           | Functional           |
-| 23      | 3              | Admin: Đăng nhập                                                         | Functional           |
-| 24      | 3              | Admin: Quản lý nhà xe (duyệt/từ chối/tạm ngưng)                        | Functional           |
-| 25      | 3              | Admin: Quản lý người dùng (xem, khóa/mở khóa)                          | Functional           |
-| 26      | 3              | Admin: Quản lý khiếu nại (phân công, xử lý, đóng)                      | Functional           |
-| 27      | 3              | Admin: Quản lý nội dung (Banner, Blog, FAQ)                             | Functional           |
+| 6       | 1              | Xem vé điện tử & mã QR                                                  | Functional, GUI      |
+| 7       | 1              | Tra cứu vé & xác thực OTP (Guest, sử dụng demo OTP: 123456)            | Functional, E2E      |
+| 8       | 2              | Hủy vé                                                                   | Functional, E2E      |
+| 9       | 2              | Khiếu nại (tạo, theo dõi, đánh giá mức độ hài lòng)                     | Functional           |
+| 10      | 2              | Quản lý hồ sơ cá nhân (cập nhật thông tin, đổi mật khẩu, avatar)        | Functional           |
+| 11      | 2              | Tích điểm thưởng (xem điểm, lịch sử, đổi điểm)                         | Functional           |
+| 12      | 2              | Operator: Đăng ký/Đăng nhập nhà xe                                      | Functional, E2E      |
+| 13      | 2              | Operator: Quản lý tuyến đường (CRUD, điểm đón/trả)                      | Functional           |
+| 14      | 2              | Operator: Quản lý xe (CRUD, trạng thái)                                 | Functional           |
+| 15      | 2              | Operator: Quản lý nhân viên (CRUD, phân quyền)                          | Functional           |
+| 16      | 2              | Operator: Quản lý lịch trình chuyến xe (tạo, chuyến lặp lại, giá động) | Functional           |
+| 17      | 2              | Operator: Quản lý voucher (CRUD, kích hoạt/vô hiệu)                    | Functional           |
+| 18      | 2              | Operator: Xem báo cáo doanh thu và thống kê                             | Functional, GUI      |
+| 19      | 3              | Trip Manager: Đăng nhập                                                  | Functional           |
+| 20      | 3              | Trip Manager: Quét QR xác thực vé + check-in hành khách                 | Functional, E2E      |
+| 21      | 3              | Trip Manager: Cập nhật trạng thái chuyến (bắt đầu/hoàn thành)           | Functional           |
+| 22      | 3              | Admin: Đăng nhập                                                         | Functional           |
+| 23      | 3              | Admin: Quản lý nhà xe (duyệt/từ chối/tạm ngưng)                        | Functional           |
+| 24      | 3              | Admin: Quản lý người dùng (xem, khóa/mở khóa)                          | Functional           |
+| 25      | 3              | Admin: Quản lý khiếu nại (phân công, xử lý, đóng)                      | Functional           |
+| 26      | 3              | Admin: Quản lý nội dung (Banner, Blog, FAQ)                             | Functional           |
 
 # 4. Lịch trình thực hiện {#lịch-trình-thực-hiện}
 

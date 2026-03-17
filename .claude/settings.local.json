@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find 'F:/KiemThuPhanMen/1. SourceCode/Ve_Xe_Nhanh_testing/backend' -name *.env* -o -name *config* -o -name *credential*)"
+    ]
+  }
+}

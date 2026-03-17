@@ -6,9 +6,51 @@
       "phone": "0901234567",
       "fullName": "Nguyen Van Khanh"
     },
+    "seed": {
+      "email": "customer1@gmail.com",
+      "password": "123456",
+      "phone": "0912345678",
+      "fullName": "Nguyễn Văn An"
+    },
     "invalid": {
       "email": "kang@gmail.com",
       "password": "NNNNNNN"
+    }
+  },
+  "operator": {
+    "valid": {
+      "email": "operator1@quikride.com",
+      "password": "operator123",
+      "companyName": "Phương Trang Express",
+      "phone": "0281234567"
+    },
+    "invalid": {
+      "email": "fakeoperator@gmail.com",
+      "password": "wrongpassword"
+    }
+  },
+  "admin": {
+    "valid": {
+      "email": "admin@quikride.com",
+      "password": "admin123",
+      "fullName": "Quản Trị Viên Hệ Thống"
+    },
+    "invalid": {
+      "email": "fakeadmin@gmail.com",
+      "password": "wrongpassword"
+    }
+  },
+  "tripManager": {
+    "valid": {
+      "employeeCode": "TM-PT-001",
+      "email": "hoa.manager@phuongtrang.com",
+      "password": "manager123",
+      "fullName": "Lê Thị Hoa",
+      "phone": "0903456789"
+    },
+    "invalid": {
+      "employeeCode": "TM-FAKE-999",
+      "password": "wrongpassword"
     }
   },
   "booking": {
