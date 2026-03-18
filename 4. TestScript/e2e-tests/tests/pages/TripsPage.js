@@ -6,18 +6,25 @@ module.exports = {
     toCityInput: '#toCity',
     dateInput: '#date',
     searchButton: '//button[contains(.,"Tìm chuyến xe")] | //button[contains(.,"Tìm chuyến xe ngay")]',
-    swapButton: '//button[contains(@class,"swap") or contains(@aria-label,"swap") or contains(.,"Đổi chiều")]',
+     swapButton: '//button[.//*[@aria-label="swap"] or contains(@aria-label,"swap") or contains(@class,"swap") or contains(.,"Đổi chiều")]',
     tripCard: '//*[contains(@class,"trip") and (contains(@class,"card") or contains(@class,"item"))] | //div[contains(@class,"ant-card")][.//button[contains(.,"Chọn chuyến này")]]',
     selectTripButton: '//button[contains(.,"Chọn chuyến này")]',
     loadingSpinner: '.ant-spin-spinning',
     antSelectOption: '//div[contains(@class,"ant-select-item-option")]',
     notification: '//*[contains(@class,"ant-message") or contains(@class,"ant-notification") or contains(@class,"alert")]',
     sortSelect: '//*[self::div or self::button][contains(.,"Sắp xếp") or contains(.,"Sort")]',
-    filterPanel: '//*[contains(.,"Bộ lọc") or contains(.,"Lọc")]'
+    filterPanel: '//*[contains(.,"Bộ lọc") or contains(.,"Lọc")]',
+    searchSummary: '//*[contains(.,"Kết quả tìm kiếm")]',
+    emptyState: '//*[contains(@class,"empty") or contains(@class,"result") or contains(@class,"search")][contains(.,"Bắt đầu hành trình của bạn") or contains(.,"Bắt đầu tìm kiếm")]'
   },
 
   messages: {
-    noResults: ['Không tìm thấy chuyến xe', 'Không có chuyến xe', 'Không tìm thấy'],
+    noResults: [
+      'Bắt đầu hành trình của bạn',
+      'Không có chuyến xe',
+      'Không tìm thấy',
+      'Bắt đầu tìm kiếm'
+    ],
     missingFrom: ['Vui lòng nhập điểm đi', 'Vui lòng chọn điểm đi'],
     missingTo: ['Vui lòng nhập điểm đến', 'Vui lòng chọn điểm đến'],
     samePoint: ['Điểm đi và điểm đến không được giống nhau', 'Điểm đi và điểm đến không được trùng nhau']
@@ -107,6 +114,7 @@ module.exports = {
 
   seeNoResults() {
     this.waitForLoadingCompleted();
+     this._seeAnyElement([this.elements.searchSummary, this.elements.emptyState, this.elements.notification]);
     this._seeOneOfTexts(this.messages.noResults);
   },
 
@@ -126,6 +134,7 @@ module.exports = {
   },
 
   swapRoute() {
+     I.waitForElement(this.elements.swapButton, 30);
     I.click(this.elements.swapButton);
     I.wait(1);
   },
