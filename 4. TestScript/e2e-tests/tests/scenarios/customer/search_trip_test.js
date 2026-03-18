@@ -13,74 +13,72 @@ Scenario('TC_SEARCH_001: Tìm kiếm chuyến xe với tuyến đường hợp l
 
     tripsPage.open();
     await tripsPage.searchTrip(route.from, route.to, date);
-    tripsPage.waitForTripsLoaded();
+    tripsPage.seeSearchResults();
     I.saveScreenshot('TC_SEARCH_001_valid_search.png');
   }
 );
 
-Scenario('TC_SEARCH_002: Hiển thị trang tìm kiếm chuyến xe', ({ I, tripsPage }) => {
-  tripsPage.open();
-  I.see('Tìm chuyến xe');
-  I.saveScreenshot('TC_SEARCH_002_search_page.png');
-});
-
-Scenario('TC_SEARCH_003: Tìm kiếm chuyến xe không có kết quả',
+Scenario('TC_SEARCH_002: Tìm kiếm chuyến xe không có kết quả',
   async ({ I, tripsPage }) => {
     tripsPage.open();
     await tripsPage.searchTrip('Hà Nội', 'Cà Mau', users.booking.daysFromNow);
-    I.wait(5);
-    I.saveScreenshot('TC_SEARCH_003_no_results.png');
+    tripsPage.seeNoResults();
+    I.saveScreenshot('TC_SEARCH_002_no_results.png');
   }
 );
 
-Scenario('TC_SEARCH_004: Xem chi tiết chuyến + sơ đồ ghế',
-  async ({ I, tripsPage, tripDetailPage }) => {
+Scenario('TC_SEARCH_003: Tìm kiếm khi không nhập thành phố đi',
+  async ({ I, tripsPage }) => {
+    tripsPage.open();
+    await tripsPage.selectCity(tripsPage.elements.toCityInput, 'Vũng Tàu');
+    tripsPage.fillDate(users.booking.daysFromNow);
+    tripsPage.clickSearch();
+    tripsPage.seeValidationMessage(tripsPage.messages.missingFrom);
+    I.saveScreenshot('TC_SEARCH_003_missing_from.png');
+  }
+);
+
+Scenario('TC_SEARCH_004: Tìm kiếm khi không nhập thành phố đến',
+  async ({ I, tripsPage }) => {
+    tripsPage.open();
+    await tripsPage.selectCity(tripsPage.elements.fromCityInput, 'TP. Hồ Chí Minh');
+    tripsPage.fillDate(users.booking.daysFromNow);
+    tripsPage.clickSearch();
+    tripsPage.seeValidationMessage(tripsPage.messages.missingTo);
+    I.saveScreenshot('TC_SEARCH_004_missing_to.png');
+  }
+);
+
+Scenario('TC_SEARCH_005: Tìm kiếm với điểm đi và điểm đến giống nhau',
+  async ({ I, tripsPage }) => {
+    tripsPage.open();
+    await tripsPage.searchTrip('TP. Hồ Chí Minh', 'TP. Hồ Chí Minh', users.booking.daysFromNow);
+    tripsPage.seeValidationMessage(tripsPage.messages.samePoint);
+    I.saveScreenshot('TC_SEARCH_005_same_route.png');
+  }
+);
+
+Scenario('TC_SEARCH_006: Hiển thị thông tin chuyến xe trong kết quả tìm kiếm',
+  async ({ I, tripsPage }) => {
     const route = users.booking.routes.default;
     const date = users.booking.daysFromNow;
 
     tripsPage.open();
     await tripsPage.searchTrip(route.from, route.to, date);
-    tripsPage.waitForTripsLoaded();
-    tripsPage.selectFirstTrip();
-
-    tripDetailPage.waitForPageLoad();
-    tripDetailPage.seeSeatMap();
-    I.saveScreenshot('TC_SEARCH_004_trip_detail_seat_map.png');
+    tripsPage.seeTripInformation();
+    I.saveScreenshot('TC_SEARCH_006_trip_information.png');
   }
 );
 
-Scenario('TC_SEARCH_005: Chọn ghế trên sơ đồ',
-  async ({ I, tripsPage, tripDetailPage }) => {
+Scenario('TC_SEARCH_007: Đối chiều tuyến đường (swap)',
+  async ({ I, tripsPage }) => {
     const route = users.booking.routes.default;
-    const date = users.booking.daysFromNow;
 
     tripsPage.open();
-    await tripsPage.searchTrip(route.from, route.to, date);
-    tripsPage.waitForTripsLoaded();
-    tripsPage.selectFirstTrip();
-
-    tripDetailPage.waitForPageLoad();
-    tripDetailPage.seeSeatMap();
-    tripDetailPage.selectFirstAvailableSeat();
-    tripDetailPage.seeSeatSelected();
-    I.saveScreenshot('TC_SEARCH_005_seat_selected.png');
-  }
-);
-
-Scenario('TC_SEARCH_006: Chọn điểm đón và trả khách',
-  async ({ I, tripsPage, tripDetailPage }) => {
-    const route = users.booking.routes.default;
-    const date = users.booking.daysFromNow;
-
-    tripsPage.open();
-    await tripsPage.searchTrip(route.from, route.to, date);
-    tripsPage.waitForTripsLoaded();
-    tripsPage.selectFirstTrip();
-
-    tripDetailPage.waitForPageLoad();
-    tripDetailPage.selectFirstAvailableSeat();
-    tripDetailPage.selectFirstPickupPoint();
-    tripDetailPage.selectFirstDropoffPoint();
-    I.saveScreenshot('TC_SEARCH_006_pickup_dropoff.png');
+    await tripsPage.selectCity(tripsPage.elements.fromCityInput, route.from);
+    await tripsPage.selectCity(tripsPage.elements.toCityInput, route.to);
+    tripsPage.swapRoute();
+    tripsPage.seeRouteValues(route.to, route.from);
+    I.saveScreenshot('TC_SEARCH_007_swap_route.png');
   }
 );
