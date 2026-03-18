@@ -47,8 +47,8 @@ const employeeTestData = {
   },
 
   editExisting: {
-    employeeCode: 'TM-PT-001',
-    fullName: 'Lê Thị Hoa Updated',
+    employeeCode: 'TM-TEST-1773864183054',
+    fullName: 'Trần Minh Tâm updated',
     phone: '0912345670',
     email: `updated.${Date.now()}@test.com`,
     idCard: '079111222333',
@@ -67,7 +67,7 @@ Scenario('TC_OP_EMP_001: Hiển thị danh sách nhân viên', ({ I, operatorEmp
   operatorEmployeesPage.open();
   operatorEmployeesPage.seeEmployeesTable();
   operatorEmployeesPage.seeTableHeaders();
-  operatorEmployeesPage.seeEmployeeRow('DRV-PT-002');
+  operatorEmployeesPage.seeEmployeeRow('DRV-PHONE-1773864453658');
   I.saveScreenshot('TC_OP_EMP_001_employee_list.png');
 });
 
@@ -126,4 +126,29 @@ Scenario('TC_OP_EMP_005: Thêm nhân viên với mã trùng', ({ I, operatorEmpl
   operatorEmployeesPage.seeErrorMessage('Có lỗi xảy ra');
 
   I.saveScreenshot('TC_OP_EMP_005_duplicate_employee_code.png');
+});
+
+Scenario('TC_OP_EMP_006: Thêm nhân viên với số điện thoại trùng', ({ I, operatorEmployeesPage }) => {
+  operatorEmployeesPage.open();
+
+  operatorEmployeesPage.clickAddEmployee();
+  operatorEmployeesPage.fillEmployeeForm({
+    employeeCode: `DRV-PHONE-${Date.now()}`,
+    fullName: ' Nguyễn Văn Điện',
+    phone: '0988888888', // dùng số đã tồn tại trong hệ thống
+    email: `duplicate.phone.${Date.now()}@test.com`,
+    idCard: '079888777666',
+    role: 'Tài Xế',
+    password: 'Driver@123',
+    status: 'Hoạt Động',
+    licenseNumber: 'LIC998877',
+    licenseClass: 'B',
+    licenseExpiryDate: '2027-03-20',
+  });
+
+  operatorEmployeesPage.submitEmployee();
+
+  operatorEmployeesPage.seeErrorMessage('Có lỗi xảy ra');
+
+  I.saveScreenshot('TC_OP_EMP_006_duplicate_phone.png');
 });

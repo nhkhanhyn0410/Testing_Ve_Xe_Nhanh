@@ -30,7 +30,9 @@ module.exports = {
     licenseNumber: '.ant-modal input[id="licenseNumber"]',
   
   },
-
+licenseExpiryDateField() {
+  return '(//div[contains(@class,"ant-modal")]//*[contains(text(),"Ngày Hết Hạn") or contains(text(),"Ngày hết hạn")]/following::input[1])[1]';
+},
   messages: {
     success: '.ant-message .ant-message-notice, .ant-notification-notice',
     error: '.ant-message .ant-message-error, .ant-message-error, .ant-notification-notice',
