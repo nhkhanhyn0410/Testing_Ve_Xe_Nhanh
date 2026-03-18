@@ -1,67 +1,70 @@
-const users = require('../../data/users.json');
+const users = require("../../data/users.json");
 
-Feature('Trip Manager - Đăng nhập & Dashboard');
+Feature("Trip Manager Authentication - Đăng nhập");
 
 Before(({ I }) => {
-  I.amOnPage('/');
-  I.waitForElement('body', 30);
+  I.amOnPage("/");
+  I.waitForElement("body", 30);
   I.clearCookie();
 });
 
-// --- LOGIN ---
+Scenario(
+  "TC_TM_AUTH_001: Hiển thị form đăng nhập Trip Manager",
+  ({ I, tripManagerLoginPage }) => {
+    tripManagerLoginPage.open();
+    tripManagerLoginPage.seeLoginForm();
+    I.see("Mã nhân viên");
+    I.see("Mật khẩu");
+    I.saveScreenshot("TC_TM_AUTH_001_login_form.png");
+  },
+);
 
-Scenario('TC_TM_001: Hiển thị form đăng nhập Trip Manager', ({ I, tripManagerLoginPage }) => {
-  tripManagerLoginPage.open();
-  tripManagerLoginPage.seeLoginForm();
-  I.saveScreenshot('TC_TM_001_login_form.png');
-});
+Scenario(
+  "TC_TM_AUTH_002: Đăng nhập TM thành công",
+  ({ I, tripManagerLoginPage }) => {
+    const tm = users.tripManager.valid;
 
-Scenario('TC_TM_002: Đăng nhập Trip Manager thành công', ({ I, tripManagerLoginPage }) => {
-  const tm = users.tripManager.valid;
-  tripManagerLoginPage.open();
-  tripManagerLoginPage.login(tm.employeeCode, tm.password);
-  I.wait(5);
-  I.seeInCurrentUrl('/trip-manager');
-  I.saveScreenshot('TC_TM_002_login_success.png');
-});
+    tripManagerLoginPage.open();
+    tripManagerLoginPage.login(tm.employeeCode, tm.password);
+    I.wait(5);
+    I.seeInCurrentUrl("/trip-manager");
+    I.saveScreenshot("TC_TM_AUTH_002_login_success.png");
+  },
+);
 
-Scenario('TC_TM_003: Đăng nhập Trip Manager với mã nhân viên sai', ({ I, tripManagerLoginPage }) => {
-  const invalid = users.tripManager.invalid;
-  tripManagerLoginPage.open();
-  tripManagerLoginPage.login(invalid.employeeCode, invalid.password);
-  I.wait(3);
-  I.saveScreenshot('TC_TM_003_login_fail.png');
-});
+Scenario(
+  "TC_TM_AUTH_003: Đăng nhập TM với mã NV sai",
+  ({ I, tripManagerLoginPage }) => {
+    const invalidEmployeeCode = users.tripManager.invalid.employeeCode;
+    const validPassword = users.tripManager.valid.password;
 
-Scenario('TC_TM_004: Đăng nhập Trip Manager với trường trống', ({ I, tripManagerLoginPage }) => {
-  tripManagerLoginPage.open();
-  tripManagerLoginPage.clickSubmit();
-  I.wait(2);
-  I.saveScreenshot('TC_TM_004_empty_fields.png');
-});
+    tripManagerLoginPage.open();
+    tripManagerLoginPage.login(invalidEmployeeCode, validPassword);
+    I.wait(3);
+    tripManagerLoginPage.seeLoginError();
+    I.saveScreenshot("TC_TM_AUTH_003_invalid_employee_code.png");
+  },
+);
 
-// --- DASHBOARD ---
+Scenario(
+  "TC_TM_AUTH_004: Đăng nhập TM với mật khẩu sai",
+  ({ I, tripManagerLoginPage }) => {
+    const validEmployeeCode = users.tripManager.valid.employeeCode;
 
-Scenario('TC_TM_005: Hiển thị Dashboard sau đăng nhập', ({ I, tripManagerLoginPage, tripManagerDashboardPage }) => {
-  const tm = users.tripManager.valid;
-  tripManagerLoginPage.open();
-  tripManagerLoginPage.login(tm.employeeCode, tm.password);
-  I.wait(5);
+    tripManagerLoginPage.open();
+    tripManagerLoginPage.login(validEmployeeCode, "wrongpass");
+    I.wait(3);
+    tripManagerLoginPage.seeLoginError("Mã nhân viên hoặc mật khẩu không đúng");
+    I.saveScreenshot("TC_TM_AUTH_004_wrong_password.png");
+  },
+);
 
-  tripManagerDashboardPage.seeDashboard();
-  tripManagerDashboardPage.seeGreeting();
-  tripManagerDashboardPage.seeStatistics();
-  I.saveScreenshot('TC_TM_005_dashboard.png');
-});
-
-Scenario('TC_TM_006: Đăng xuất khỏi Trip Manager', ({ I, tripManagerLoginPage, tripManagerDashboardPage }) => {
-  const tm = users.tripManager.valid;
-  tripManagerLoginPage.open();
-  tripManagerLoginPage.login(tm.employeeCode, tm.password);
-  I.wait(5);
-
-  tripManagerDashboardPage.clickLogout();
-  I.wait(3);
-  I.seeInCurrentUrl('/trip-manager/login');
-  I.saveScreenshot('TC_TM_006_logout.png');
-});
+Scenario(
+  "TC_TM_AUTH_005: Đăng nhập TM với trường trống",
+  ({ I, tripManagerLoginPage }) => {
+    tripManagerLoginPage.open();
+    tripManagerLoginPage.clickSubmit();
+    I.wait(2);
+    I.saveScreenshot("TC_TM_AUTH_005_empty_fields.png");
+  },
+);

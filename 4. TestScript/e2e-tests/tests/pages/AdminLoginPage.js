@@ -1,32 +1,37 @@
 const { I } = inject();
 
 module.exports = {
-
   fields: {
-    email: '//form[@name="admin-login"]//input[contains(@type,"text") or contains(@type,"email")]',
-    password: '//form[@name="admin-login"]//input[@type="password"]',
+    email: "#admin-login_email",
+    password: "#admin-login_password",
   },
 
   buttons: {
-    submit: '//form[@name="admin-login"]//button[@type="submit"]',
+    submit: 'button[type="submit"]',
     homeLink: '//a[contains(@href,"/")]',
   },
 
   messages: {
-    error: '.ant-message-error',
-    success: '.ant-message-success',
+    errorToast: ".ant-message-error, .ant-message-notice-content",
+    successToast: ".ant-message-success, .ant-message-notice-content",
+    validation: ".ant-form-item-explain-error",
   },
 
   open() {
-    I.amOnPage('/admin/login');
+    I.amOnPage("/admin/login");
     I.waitForElement(this.fields.email, 30);
+    I.waitForElement(this.fields.password, 30);
   },
 
   fillEmail(email) {
+    I.click(this.fields.email);
+    I.clearField(this.fields.email);
     I.fillField(this.fields.email, email);
   },
 
   fillPassword(password) {
+    I.click(this.fields.password);
+    I.clearField(this.fields.password);
     I.fillField(this.fields.password, password);
   },
 
@@ -40,26 +45,22 @@ module.exports = {
     this.clickSubmit();
   },
 
-  loginWithValidAdmin() {
-    const user = require('../data/users.json').admin.valid;
-    this.login(user.email, user.password);
-  },
-
   seeLoginForm() {
     I.seeElement(this.fields.email);
     I.seeElement(this.fields.password);
     I.seeElement(this.buttons.submit);
   },
 
-  seeLoginSuccess() {
-    I.wait(5);
-    I.seeInCurrentUrl('/admin');
-  },
-
   seeLoginError(message) {
     I.wait(3);
+    I.seeElement(this.messages.errorToast);
     if (message) {
       I.see(message);
     }
+  },
+
+  seeValidationErrors() {
+    I.wait(1);
+    I.seeElement(this.messages.validation);
   },
 };

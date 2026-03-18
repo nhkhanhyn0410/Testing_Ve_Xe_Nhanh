@@ -1,32 +1,37 @@
 const { I } = inject();
 
 module.exports = {
-
   fields: {
-    employeeCode: '//form[@name="trip-manager-login"]//input[contains(@placeholder,"EMP")]',
-    password: '//form[@name="trip-manager-login"]//input[@type="password"]',
+    employeeCode: "#trip-manager-login_employeeCode",
+    password: "#trip-manager-login_password",
   },
 
   buttons: {
-    submit: '//form[@name="trip-manager-login"]//button[@type="submit"]',
+    submit: 'button[type="submit"]',
     homeLink: '//a[contains(@href,"/")]',
   },
 
   messages: {
-    error: '.ant-message-error',
-    success: '.ant-message-success',
+    error: ".ant-message-error, .ant-message-notice-content",
+    success: ".ant-message-success, .ant-message-notice-content",
+    validation: ".ant-form-item-explain-error",
   },
 
   open() {
-    I.amOnPage('/trip-manager/login');
+    I.amOnPage("/trip-manager/login");
     I.waitForElement(this.fields.employeeCode, 30);
+    I.waitForElement(this.fields.password, 30);
   },
 
   fillEmployeeCode(code) {
+    I.click(this.fields.employeeCode);
+    I.clearField(this.fields.employeeCode);
     I.fillField(this.fields.employeeCode, code);
   },
 
   fillPassword(password) {
+    I.click(this.fields.password);
+    I.clearField(this.fields.password);
     I.fillField(this.fields.password, password);
   },
 
@@ -41,7 +46,7 @@ module.exports = {
   },
 
   loginWithValidTripManager() {
-    const user = require('../data/users.json').tripManager.valid;
+    const user = require("../data/users.json").tripManager.valid;
     this.login(user.employeeCode, user.password);
   },
 
@@ -53,13 +58,19 @@ module.exports = {
 
   seeLoginSuccess() {
     I.wait(5);
-    I.seeInCurrentUrl('/trip-manager');
+    I.seeInCurrentUrl("/trip-manager");
   },
 
   seeLoginError(message) {
     I.wait(3);
+    I.seeElement(this.messages.error);
     if (message) {
       I.see(message);
     }
+  },
+
+  seeValidationErrors() {
+    I.wait(1);
+    I.seeElement(this.messages.validation);
   },
 };
