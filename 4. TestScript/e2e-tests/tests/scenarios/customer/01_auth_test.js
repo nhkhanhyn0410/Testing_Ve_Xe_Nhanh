@@ -1,59 +1,90 @@
-Feature('Customer Authentication');
+Feature("Customer Authentication");
+
+const testData = require("../../data/users.json");
 
 Before(({ I }) => {
-  I.amOnPage('/');
-  I.waitForElement('body', 30);
+  I.amOnPage("/");
+  I.waitForElement("body", 30);
   I.clearCookie();
 });
 
-Scenario('TC_AUTH_001: Open login page', ({ I, loginPage }) => {
+Scenario("TC_AUTH_001: Hiển thị form đăng nhập", ({ I, loginPage }) => {
   loginPage.open();
   loginPage.seeLoginForm();
-  I.see('Đăng nhập');
+  I.see("Đăng nhập");
 });
 
-Scenario('TC_AUTH_002: Login with valid credentials',
+Scenario(
+  "TC_AUTH_002: Đăng nhập thành công với tài khoản hợp lệ",
   ({ I, loginPage }) => {
-    const testData = require('../../data/users.json');
     const user = testData.customer.valid;
+
     loginPage.open();
     loginPage.login(user.email, user.password);
-    I.wait(5);
-    // Đăng nhập thành công → chuyển về trang chủ, không còn ở /login
-    I.dontSeeInCurrentUrl('/login');
-    I.dontSeeElement(loginPage.messages.error);
-  });
+    I.wait(10);
+    I.dontSeeInCurrentUrl("/login");
+    I.dontSee("Email hoặc mật khẩu không đúng");
+  },
+);
 
-Scenario('TC_AUTH_003: Login with invalid password',
+Scenario("TC_AUTH_003: Đăng nhập với mật khẩu sai", ({ I, loginPage }) => {
+  const user = testData.customer.valid;
+  const invalidUser = testData.customer.invalid;
+
+  loginPage.open();
+  loginPage.login(user.email, invalidUser.password);
+  I.wait(5);
+  I.seeInCurrentUrl("/login");
+  I.see("Email/Số điện thoại hoặc mật khẩu không đúng");
+});
+
+Scenario(
+  "TC_AUTH_004: Đăng nhập với email không tồn tại",
   ({ I, loginPage }) => {
-    const testData = require('../../data/users.json');
-    const user = testData.customer.valid;
     const invalidUser = testData.customer.invalid;
-    loginPage.open();
-    loginPage.login(user.email, invalidUser.password);
-    I.wait(3);
-    // Đăng nhập thất bại → vẫn ở trang login + hiển thị lỗi
-    I.seeInCurrentUrl('/login');
-    I.seeElement(loginPage.messages.error);
-  });
 
-Scenario('TC_AUTH_004: Login with empty fields',
-  ({ I, loginPage }) => {
     loginPage.open();
-    loginPage.clickSubmit();
-    I.wait(2);
-    // Không cho submit → vẫn ở trang login
-    I.seeInCurrentUrl('/login');
-  });
-
-Scenario('TC_AUTH_005: Login with Invalid credentials',
-  ({ I, loginPage }) => {
-    const testData = require('../../data/users.json');
-    const invalidUser = testData.customer.invalid;
-    loginPage.open();
-    loginPage.login(invalidUser.email, invalidUser.password);
+    loginPage.login(invalidUser.email, "Test@123");
     I.wait(5);
-    // Đăng nhập thất bại → vẫn ở trang login + hiển thị lỗi
-    I.seeInCurrentUrl('/login');
-    I.seeElement(loginPage.messages.error);
-  });
+    I.seeInCurrentUrl("/login");
+    I.see("Email/Số điện thoại hoặc mật khẩu không đúng");
+  },
+);
+
+Scenario("TC_AUTH_005: Đăng nhập với Email trống", ({ I, loginPage }) => {
+  const user = testData.customer.valid;
+
+  loginPage.open();
+  loginPage.fillPassword(user.password);
+  loginPage.clickSubmit();
+  I.wait(5);
+  I.seeInCurrentUrl("/login");
+  I.see("Nhập email");
+});
+
+Scenario("TC_AUTH_006: Đăng nhập với Mật khẩu trống", ({ I, loginPage }) => {
+  const user = testData.customer.valid;
+
+  loginPage.open();
+  loginPage.fillEmail(user.email);
+  loginPage.clickSubmit();
+  I.wait(5);
+  I.seeInCurrentUrl("/login");
+  I.see("Nhập mật khẩu");
+});
+
+Scenario("TC_AUTH_007: Đăng nhập với cả 2 trường trống", ({ I, loginPage }) => {
+  loginPage.open();
+  loginPage.clickSubmit();
+  I.wait(5);
+  I.seeInCurrentUrl("/login");
+  I.see("Nhập email!");
+  I.see("Nhập mật khẩu!");
+});
+
+Scenario("TC_AUTH_008: Mật khẩu được ẩn (masked)", async ({ I, loginPage }) => {
+  loginPage.open();
+  loginPage.fillPassword("Test@123");
+  const inputType = await loginPage.grabPasswordType();
+  I.assertEqual(inputType, "password");
+});
