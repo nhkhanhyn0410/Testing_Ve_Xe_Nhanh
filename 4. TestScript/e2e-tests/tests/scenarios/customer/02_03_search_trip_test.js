@@ -21,7 +21,7 @@ Scenario('TC_SEARCH_001: Tìm kiếm chuyến xe với tuyến đường hợp l
 Scenario('TC_SEARCH_002: Tìm kiếm chuyến xe không có kết quả',
   async ({ I, tripsPage }) => {
     tripsPage.open();
-    await tripsPage.searchTrip('Hà Nội', 'Cà Mau', users.booking.daysFromNow);
+    await tripsPage.searchTrip('Hà Nội', 'Đà Nẵng', users.booking.daysFromNow);
     tripsPage.seeNoResults();
     I.saveScreenshot('TC_SEARCH_002_no_results.png');
   }
