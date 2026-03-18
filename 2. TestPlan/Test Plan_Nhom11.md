@@ -359,66 +359,70 @@ Documentation</td>
 
 # 3. Phạm vi kiểm thử {#phạm-vi-kiểm-thử}
 
-|         |                |                                                                          |                      |
-|---------|----------------|--------------------------------------------------------------------------|----------------------|
-| **STT** | **Độ ưu tiên** | **Nội dung**                                                             | **Loại test**        |
-| 1       | 1              | Đăng ký/Đăng nhập Customer (email)                                      | Functional, E2E      |
-| 2       | 1              | Tìm kiếm chuyến xe + lọc/sắp xếp                                        | Functional, GUI      |
-| 3       | 1              | Xem chi tiết chuyến + sơ đồ ghế real-time                               | Functional, GUI      |
-| 4       | 1              | Đặt vé (chọn ghế, nhập thông tin hành khách, áp dụng voucher)           | Functional, E2E      |
-| 5       | 1              | Thanh toán (VNPay/Tiền mặt)                                             | Functional, E2E      |
-| 6       | 1              | Xem vé điện tử & mã QR                                                  | Functional, GUI      |
-| 7       | 1              | Tra cứu vé & xác thực OTP (Guest, sử dụng demo OTP: 123456)            | Functional, E2E      |
-| 8       | 2              | Hủy vé                                                                   | Functional, E2E      |
-| 9       | 2              | Khiếu nại (tạo, theo dõi, đánh giá mức độ hài lòng)                     | Functional           |
-| 10      | 2              | Quản lý hồ sơ cá nhân (cập nhật thông tin, đổi mật khẩu, avatar)        | Functional           |
-| 11      | 2              | Tích điểm thưởng (xem điểm, lịch sử, đổi điểm)                         | Functional           |
-| 12      | 2              | Operator: Đăng ký/Đăng nhập nhà xe                                      | Functional, E2E      |
-| 13      | 2              | Operator: Quản lý tuyến đường (CRUD, điểm đón/trả)                      | Functional           |
-| 14      | 2              | Operator: Quản lý xe (CRUD, trạng thái)                                 | Functional           |
-| 15      | 2              | Operator: Quản lý nhân viên (CRUD, phân quyền)                          | Functional           |
-| 16      | 2              | Operator: Quản lý lịch trình chuyến xe (tạo, chuyến lặp lại, giá động) | Functional           |
-| 17      | 2              | Operator: Quản lý voucher (CRUD, kích hoạt/vô hiệu)                    | Functional           |
-| 18      | 2              | Operator: Xem báo cáo doanh thu và thống kê                             | Functional, GUI      |
-| 19      | 3              | Trip Manager: Đăng nhập                                                  | Functional           |
-| 20      | 3              | Trip Manager: Quét QR xác thực vé + check-in hành khách                 | Functional, E2E      |
-| 21      | 3              | Trip Manager: Cập nhật trạng thái chuyến (bắt đầu/hoàn thành)           | Functional           |
-| 22      | 3              | Admin: Đăng nhập                                                         | Functional           |
-| 23      | 3              | Admin: Quản lý nhà xe (duyệt/từ chối/tạm ngưng)                        | Functional           |
-| 24      | 3              | Admin: Quản lý người dùng (xem, khóa/mở khóa)                          | Functional           |
-| 25      | 3              | Admin: Quản lý khiếu nại (phân công, xử lý, đóng)                      | Functional           |
-| 26      | 3              | Admin: Quản lý nội dung (Banner, Blog, FAQ)                             | Functional           |
+| **STT** | **Độ ưu tiên** | **Nội dung** | **Loại test** | **Người thực hiện** |
+|:---:|:---:|---|---|---|
+| 1 | 1 | Đăng ký/Đăng nhập Customer (email) | Functional, E2E | Thông |
+| 2 | 1 | Tìm kiếm chuyến xe + lọc/sắp xếp | Functional, GUI | Trường |
+| 3 | 1 | Xem chi tiết chuyến + sơ đồ ghế real-time | Functional, GUI | Trường |
+| 4 | 1 | Đặt vé (chọn ghế, nhập thông tin hành khách, áp dụng voucher) | Functional, E2E | Khanh |
+| 5 | 1 | Thanh toán (VNPay/Tiền mặt) | Functional, E2E | Khanh |
+| 6 | 1 | Xem vé điện tử & mã QR | Functional, GUI | Khanh |
+| 7 | 1 | Tra cứu vé & xác thực OTP (Guest, sử dụng demo OTP: 123456) | Functional, E2E | Thông |
+| 8 | 2 | Hủy vé | Functional, E2E | Thông |
+| 9 | 2 | Khiếu nại (tạo, theo dõi, đánh giá mức độ hài lòng) | Functional | Thông |
+| 10 | 2 | Quản lý hồ sơ cá nhân (cập nhật thông tin, đổi mật khẩu, avatar) | Functional | Khanh |
+| 11 | 2 | Tích điểm thưởng (xem điểm, lịch sử, đổi điểm) | Functional | Thông |
+| 12 | 2 | Operator: Đăng ký/Đăng nhập nhà xe | Functional, E2E | Thông |
+| 13 | 2 | Operator: Quản lý tuyến đường (CRUD, điểm đón/trả) | Functional | Trường |
+| 14 | 2 | Operator: Quản lý xe (CRUD, trạng thái) | Functional | Khanh |
+| 15 | 2 | Operator: Quản lý nhân viên (CRUD, phân quyền) | Functional | Trường |
+| 16 | 2 | Operator: Quản lý lịch trình chuyến xe (tạo, chuyến lặp lại, giá động) | Functional | Trường |
+| 17 | 2 | Operator: Quản lý voucher (CRUD, kích hoạt/vô hiệu) | Functional | Trường |
+| 18 | 2 | Operator: Xem báo cáo doanh thu và thống kê | Functional, GUI | Trường |
+| 19 | 3 | Trip Manager: Đăng nhập | Functional | Thông |
+| 20 | 3 | Trip Manager: Quét QR xác thực vé + check-in hành khách | Functional, E2E | Khanh |
+| 21 | 3 | Trip Manager: Cập nhật trạng thái chuyến (bắt đầu/hoàn thành) | Functional | Khanh |
+| 22 | 3 | Admin: Đăng nhập | Functional | Thông |
+| 23 | 3 | Admin: Quản lý nhà xe (duyệt/từ chối/tạm ngưng) | Functional | Trường |
+| 24 | 3 | Admin: Quản lý người dùng (xem, khóa/mở khóa) | Functional | Khanh |
+| 25 | 3 | Admin: Quản lý khiếu nại (phân công, xử lý, đóng) | Functional | Khanh |
+| 26 | 3 | Admin: Quản lý nội dung (Banner, Blog, FAQ) | Functional | Khanh |
 
 # 4. Lịch trình thực hiện {#lịch-trình-thực-hiện}
 
-|                                                                                       |                         |               |             |              |
-|---------------------------------------------------------------------------------------|-------------------------|---------------|-------------|--------------|
-| **Công việc**                                                                         | **Người thực hiện**     | **Thời gian** | **Bắt đầu** | **Kết thúc** |
-| Lập kế hoạch kiểm thử + chuẩn bị mẫu viết ca kiểm thử và mẫu báo lỗi                  | Khanh (Leader)          | 1 ngày        | 24/01/2026  | 24/01/2026   |
-| Chuẩn bị dữ liệu kiểm thử (tài khoản, tuyến xe, voucher, phương thức thanh toán test) | Khanh + Thông + Trường  | 0.5 ngày      | 25/01/2026  | 25/01/2026   |
-| Viết Testcase chức năng Đăng ký/Đăng nhập (1)                                         | Thông                   | 0.5 ngày      | 25/01/2026  | 25/01/2026   |
-| Viết Testcase chức năng Tìm kiếm chuyến xe (2)                                        | Thông                   | 0.5 ngày      | 25/01/2026  | 25/01/2026   |
-| Viết Testcase chức năng Xem chi tiết chuyến + sơ đồ ghế theo thời gian thực (3)       | Trường                  | 1 ngày        | 25/01/2026  | 25/01/2026   |
-| Viết Testcase chức năng Đặt vé (4)                                                    | Thông                   | 1 ngày        | 26/01/2026  | 26/01/2026   |
-| Viết Testcase chức năng Thanh toán (5)                                                | Trường                  | 0.5 ngày      | 26/01/2026  | 26/01/2026   |
-| Viết Testcase chức năng Nhận vé điện tử QR + gửi Email (6)                            | Trường                  | 0.5 ngày      | 26/01/2026  | 26/01/2026   |
-| Viết Testcase chức năng Tra cứu vé & OTP (7)                                          | Thông                   | 0.5 ngày      | 27/01/2026  | 27/01/2026   |
-| Viết Testcase chức năng Hủy vé(8)                                                     | Thông                   | 0.5 ngày      | 27/01/2026  | 27/01/2026   |
-| Viết Testcase chức năng Quản trị viên: quản lý tuyến/xe/nhân viên/lịch trình (9)      | Trường                  | 0.5 ngày      | 27/01/2026  | 27/01/2026   |
-| Viết Testcase chức năng Nhân viên điều phối: quét QR, xác nhận lên xe (10)            | Trường                  | 0.5 ngày      | 27/01/2026  | 27/01/2026   |
-| Kiểm tra lại Testcase + chốt phạm vi + lập danh sách kiểm tra nhanh                   | Khanh (Leader)          | 0.5 ngày      | 27/01/2026  | 27/01/2026   |
-| Kiểm thử nhanh toàn hệ thống (kiểm tra hoạt động cơ bản)                              | Cả nhóm                 | 1 ngày        | 28/01/2026  | 28/01/2026   |
-| Kiểm thử chức năng mức ưu tiên cao: Đăng nhập + Tìm kiếm + Đặt vé (1,2,4)             | Thông                   | 1 ngày        | 29/01/2026  | 29/01/2026   |
-| Kiểm thử chức năng mức ưu tiên cao: Sơ đồ ghế + Thanh toán + Vé điện tử (3,5,6)       | Trường                  | 1 ngày        | 29/01/2026  | 29/01/2026   |
-| Ghi nhận lỗi + cập nhật kết quả kiểm thử + kiểm tra lại sau khi sửa lỗi               | Khanh + Thông + Trường  | 1 ngày        | 30/01/2026  | 30/01/2026   |
-| Kiểm thử chức năng: Tra cứu vé & OTP (7)                                              | Thông                   | 0.5 ngày      | 31/01/2026  | 31/01/2026   |
-| Kiểm thử chức năng: Hủy/Đổi vé + hoàn tiền (8)                                        | Thông                   | 0.5 ngày      | 31/01/2026  | 31/01/2026   |
-| Kiểm thử chức năng: Trang quản trị (9)                                                | Trường                  | 0.5 ngày      | 31/01/2026  | 31/01/2026   |
-| Kiểm thử chức năng: Quét QR check-in (10)                                             | Trường                  | 0.5 ngày      | 31/01/2026  | 31/01/2026   |
-| Tổng hợp danh sách lỗi theo mức độ nghiêm trọng + theo dõi xử lý lỗi                  | Khanh (Leader)          | 1 ngày        | 01/02/2026  | 01/02/2026   |
-| Kiểm thử lại toàn bộ hệ thống sau khi sửa lỗi (kiểm thử hồi quy)                      | Cả nhóm (Khanh quản lý) | 1 ngày        | 02/02/2026  | 02/02/2026   |
-| Tổng hợp kết quả kiểm thử + lập báo cáo cuối + bàn giao                               | Khanh (Leader)          | 1 ngày        | 03/02/2026  | 03/02/2026   |
-
+| **Công việc** | **Người thực hiện** | **Thời gian** | **Bắt đầu** | **Kết thúc** |
+|---|---|---|---|---|
+| Lập kế hoạch kiểm thử + chuẩn bị mẫu testcase & defect | Khanh (Leader) | 1 ngày | 24/01/2026 | 24/01/2026 |
+| Chuẩn bị dữ liệu kiểm thử (tài khoản, tuyến xe, thanh toán test) | Cả nhóm | 0.5 ngày | 25/01/2026 | 25/01/2026 |
+| Viết testcase và kiểm thử: Đăng ký/Đăng nhập Customer (1) | Thông | 0.5 ngày | 25/01/2026 | 25/01/2026 |
+| Viết testcase và kiểm thử: Tìm kiếm chuyến xe (2) | Trường | 0.5 ngày | 25/01/2026 | 25/01/2026 |
+| Viết testcase và kiểm thử: Xem chi tiết chuyến & sơ đồ ghế (3) | Trường | 0.5 ngày | 26/01/2026 | 26/01/2026 |
+| Viết testcase và kiểm thử: Đặt vé (4) | Khanh | 0.5 ngày | 26/01/2026 | 26/01/2026 |
+| Viết testcase và kiểm thử: Thanh toán (5) | Khanh | 0.5 ngày | 26/01/2026 | 26/01/2026 |
+| Viết testcase và kiểm thử: Xem vé điện tử & mã QR (6) | Khanh | 0.5 ngày | 27/01/2026 | 27/01/2026 |
+| Viết testcase và kiểm thử: Tra cứu vé & xác thực OTP (7) | Thông | 0.5 ngày | 27/01/2026 | 27/01/2026 |
+| Viết testcase và kiểm thử: Hủy vé (8) | Thông | 0.5 ngày | 27/01/2026 | 27/01/2026 |
+| Viết testcase và kiểm thử: Khiếu nại (9) | Thông | 0.5 ngày | 28/01/2026 | 28/01/2026 |
+| Viết testcase và kiểm thử: Quản lý hồ sơ cá nhân (10) | Khanh | 0.5 ngày | 28/01/2026 | 28/01/2026 |
+| Viết testcase và kiểm thử: Tích điểm thưởng (11) | Thông | 0.5 ngày | 28/01/2026 | 28/01/2026 |
+| Viết testcase và kiểm thử: Operator - Đăng ký/Đăng nhập (12) | Thông | 0.5 ngày | 28/01/2026 | 28/01/2026 |
+| Viết testcase và kiểm thử: Operator - Quản lý tuyến đường (13) | Trường | 0.5 ngày | 29/01/2026 | 29/01/2026 |
+| Viết testcase và kiểm thử: Operator - Quản lý xe (14) | Khanh | 0.5 ngày | 29/01/2026 | 29/01/2026 |
+| Viết testcase và kiểm thử: Operator - Quản lý nhân viên (15) | Trường | 0.5 ngày | 29/01/2026 | 29/01/2026 |
+| Viết testcase và kiểm thử: Operator - Quản lý lịch trình (16) | Trường | 0.5 ngày | 29/01/2026 | 29/01/2026 |
+| Viết testcase và kiểm thử: Operator - Quản lý voucher (17) | Trường | 0.5 ngày | 30/01/2026 | 30/01/2026 |
+| Viết testcase và kiểm thử: Operator - Xem báo cáo (18) | Trường | 0.5 ngày | 30/01/2026 | 30/01/2026 |
+| Viết testcase và kiểm thử: Trip Manager - Đăng nhập (19) | Thông | 0.5 ngày | 30/01/2026 | 30/01/2026 |
+| Viết testcase và kiểm thử: Trip Manager - Quét QR check-in (20) | Khanh | 0.5 ngày | 30/01/2026 | 30/01/2026 |
+| Viết testcase và kiểm thử: Trip Manager - Trạng thái chuyến (21) | Khanh | 0.5 ngày | 31/01/2026 | 31/01/2026 |
+| Viết testcase và kiểm thử: Admin - Đăng nhập (22) | Thông | 0.5 ngày | 31/01/2026 | 31/01/2026 |
+| Viết testcase và kiểm thử: Admin - Quản lý nhà xe (23) | Trường | 0.5 ngày | 31/01/2026 | 31/01/2026 |
+| Viết testcase và kiểm thử: Admin - Quản lý người dùng (24) | Khanh | 0.5 ngày | 31/01/2026 | 31/01/2026 |
+| Viết testcase và kiểm thử: Admin - Quản lý khiếu nại (25) | Khanh | 0.5 ngày | 01/02/2026 | 01/02/2026 |
+| Viết testcase và kiểm thử: Admin - Quản lý nội dung (26) | Khanh | 0.5 ngày | 01/02/2026 | 01/02/2026 |
+| Tổng hợp danh sách lỗi theo mức độ nghiêm trọng | Khanh (Leader) | 1 ngày | 01/02/2026 | 01/02/2026 |
+| Kiểm thử lại toàn bộ hệ thống sau khi sửa lỗi (Regression test) | Cả nhóm | 1 ngày | 02/02/2026 | 02/02/2026 |
+| Tổng hợp kết quả kiểm thử + lập báo cáo cuối + bàn giao | Khanh (Leader) | 1 ngày | 03/02/2026 | 03/02/2026 |
 # 5. Các sản phẩm {#các-sản-phẩm}
 
 <table>
