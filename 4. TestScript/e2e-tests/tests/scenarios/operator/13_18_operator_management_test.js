@@ -3,7 +3,37 @@ const users = require('../../data/users.json');
 Feature('Operator Management - Quản lý tuyến đường, xe, voucher');
 
 const operator = users.operator.valid;
-
+const routeTestData = {
+  create: {
+    routeName: 'HCM - Đà Lạt',
+    routeCode: `RT-DL-${Date.now()}`,
+    originProvince: 'TP. Hồ Chí Minh',
+    originDistrict: 'Quận 1',
+    destinationProvince: 'Đà Lạt',
+    destinationDistrict: 'Phường 3',
+    distance: '300',
+    estimatedDuration: '360',
+    pickupPoints: [
+      {
+        name: 'Bến xe Miền Đông',
+        address: '292 Đinh Bộ Lĩnh, P.26, Q. Bình Thạnh',
+      },
+    ],
+    dropoffPoints: [
+      {
+        name: 'Bến xe Đà Lạt',
+        address: '1 Tô Hiến Thành, P.3, TP. Đà Lạt',
+      },
+    ],
+  },
+  edit: {
+    routeKeyword: 'BD-DN-001',
+    routeDisplay: 'Bình Dương - Đà Nẵng',
+    newDistance: '650',
+    secondPickupName: 'Bến xe Miền Đông',
+    secondPickupAddress: '292 Đinh Bộ Lĩnh, P.26, Q. Bình Thạnh',
+  },
+};
 Before(({ I, operatorLoginPage }) => {
   I.clearCookie();
   operatorLoginPage.open();
@@ -16,103 +46,72 @@ Before(({ I, operatorLoginPage }) => {
 Scenario('TC_OP_ROUTE_001: Hiển thị danh sách tuyến đường', ({ I, operatorRoutesPage }) => {
   operatorRoutesPage.open();
   operatorRoutesPage.seeRoutesTable();
+  operatorRoutesPage.seeRouteInList('BD-DN-001');
   I.saveScreenshot('TC_OP_ROUTE_001_routes_list.png');
 });
 
-Scenario('TC_OP_ROUTE_002: Mở modal tạo tuyến đường mới', ({ I, operatorRoutesPage }) => {
+Scenario('TC_OP_ROUTE_002: Tạo tuyến đường mới thành công', ({ I, operatorRoutesPage }) => {
+  operatorRoutesPage.open();
+  operatorRoutesPage.createRoute(routeTestData.create);
+  operatorRoutesPage.seeSuccessToast();
+  operatorRoutesPage.seeRouteInList(routeTestData.create.routeCode);
+  I.saveScreenshot('TC_OP_ROUTE_002_create_route_success.png');
+});
+
+Scenario('TC_OP_ROUTE_003: Tạo tuyến đường với trường bắt buộc trống', ({ I, operatorRoutesPage }) => {
   operatorRoutesPage.open();
   operatorRoutesPage.clickCreateRoute();
-  I.seeElement(operatorRoutesPage.modal.routeModal);
-  I.saveScreenshot('TC_OP_ROUTE_002_create_modal.png');
+  operatorRoutesPage.fillBasicRouteInfo({
+    routeName: '',
+    routeCode: 'RT-DL-001',
+    originProvince: 'TP. Hồ Chí Minh',
+    originDistrict: 'Quận 1',
+    destinationProvince: 'Đà Lạt',
+    destinationDistrict: 'Phường 3',
+    distance: '300',
+    estimatedDuration: '360',
+  });
+  operatorRoutesPage.addPickupPoint('Bến xe Miền Đông', '292 Đinh Bộ Lĩnh, P.26, Q. Bình Thạnh', 1);
+  operatorRoutesPage.addDropoffPoint('Bến xe Đà Lạt', '1 Tô Hiến Thành, P.3, TP. Đà Lạt', 1);
+  operatorRoutesPage.submitRoute();
+  operatorRoutesPage.seeValidationMessage('Hãy nhập thông tin cho trường Tên Tuyến');
+  I.saveScreenshot('TC_OP_ROUTE_003_create_route_required_validation.png');
 });
 
-Scenario('TC_OP_ROUTE_003: Tạo tuyến đường mới', ({ I, operatorRoutesPage }) => {
+Scenario('TC_OP_ROUTE_004: Sửa thông tin tuyến đường', ({ I, operatorRoutesPage }) => {
   operatorRoutesPage.open();
-  operatorRoutesPage.createRoute(
-    'Test Route ' + Date.now(),
-    'TR-' + Date.now(),
-    'TP. Hồ Chí Minh', 'Quận 1',
-    'Đà Lạt', 'TP. Đà Lạt',
-    '300', '420'
+  operatorRoutesPage.updateDistance(routeTestData.edit.routeKeyword, routeTestData.edit.newDistance);
+  operatorRoutesPage.seeSuccessToast();
+  operatorRoutesPage.seeDistanceValue(routeTestData.edit.newDistance);
+  I.saveScreenshot('TC_OP_ROUTE_004_update_route_distance.png');
+});
+
+Scenario('TC_OP_ROUTE_005: Thêm điểm đón cho tuyến đường', ({ I, operatorRoutesPage }) => {
+  operatorRoutesPage.open();
+  operatorRoutesPage.addPickupPointForRoute(
+    routeTestData.edit.routeKeyword,
+    routeTestData.edit.secondPickupName,
+    routeTestData.edit.secondPickupAddress,
+    2,
   );
-  I.wait(3);
-  I.saveScreenshot('TC_OP_ROUTE_003_create_route.png');
+  operatorRoutesPage.seeSuccessToast();
+  operatorRoutesPage.seeRouteInList(routeTestData.edit.routeKeyword);
+  I.saveScreenshot('TC_OP_ROUTE_005_add_pickup_point.png');
 });
 
-// === BUSES (Xe) ===
+Scenario('TC_OP_ROUTE_006: Xóa tuyến đường và kiểm tra mã tuyến không còn tồn tại', ({ I, operatorRoutesPage }) => {
+  const routeCodeToDelete = routeTestData.create.routeCode;
 
-Scenario('TC_OP_BUS_001: Hiển thị danh sách xe', ({ I, operatorBusesPage }) => {
-  operatorBusesPage.open();
-  operatorBusesPage.seeBusesTable();
-  I.saveScreenshot('TC_OP_BUS_001_buses_list.png');
-});
+  operatorRoutesPage.open();
+  operatorRoutesPage.seeRouteInList(routeCodeToDelete);
 
-Scenario('TC_OP_BUS_002: Mở modal thêm xe mới', ({ I, operatorBusesPage }) => {
-  operatorBusesPage.open();
-  operatorBusesPage.clickAddBus();
-  I.seeElement(operatorBusesPage.modal.busModal);
-  I.saveScreenshot('TC_OP_BUS_002_add_bus_modal.png');
-});
+  operatorRoutesPage.deleteRoute(routeCodeToDelete);
 
-Scenario('TC_OP_BUS_003: Thêm xe mới', ({ I, operatorBusesPage }) => {
-  operatorBusesPage.open();
-  operatorBusesPage.createBus('29A-' + Math.floor(Math.random() * 90000 + 10000), 'Limousine');
-  I.wait(3);
-  I.saveScreenshot('TC_OP_BUS_003_create_bus.png');
-});
+  I.wait(2);
+  I.refreshPage();
+  operatorRoutesPage.waitForPageReady();
 
-// === EMPLOYEES (Nhân viên) ===
+  operatorRoutesPage.dontSeeRouteRow(routeCodeToDelete);
 
-Scenario('TC_OP_EMP_001: Hiển thị danh sách nhân viên', ({ I, operatorEmployeesPage }) => {
-  operatorEmployeesPage.open();
-  operatorEmployeesPage.seeEmployeesTable();
-  I.saveScreenshot('TC_OP_EMP_001_employees_list.png');
-});
-
-// === TRIPS (Chuyến xe) ===
-
-Scenario('TC_OP_TRIP_001: Hiển thị danh sách chuyến xe', ({ I, operatorTripsPage }) => {
-  operatorTripsPage.open();
-  operatorTripsPage.seeTripsTable();
-  I.saveScreenshot('TC_OP_TRIP_001_trips_list.png');
-});
-
-Scenario('TC_OP_TRIP_002: Mở modal tạo chuyến xe mới', ({ I, operatorTripsPage }) => {
-  operatorTripsPage.open();
-  operatorTripsPage.clickCreateTrip();
-  I.seeElement(operatorTripsPage.modal.tripModal);
-  I.saveScreenshot('TC_OP_TRIP_002_create_trip_modal.png');
-});
-
-// === VOUCHERS ===
-
-Scenario('TC_OP_VOUCHER_001: Hiển thị danh sách voucher', ({ I, operatorVouchersPage }) => {
-  operatorVouchersPage.open();
-  operatorVouchersPage.seeVouchersTable();
-  operatorVouchersPage.seeStatistics();
-  I.saveScreenshot('TC_OP_VOUCHER_001_vouchers_list.png');
-});
-
-Scenario('TC_OP_VOUCHER_002: Tạo voucher mới', ({ I, operatorVouchersPage }) => {
-  const code = 'TEST' + Date.now();
-  operatorVouchersPage.open();
-  operatorVouchersPage.createVoucher(code, 'Voucher test tự động', '10');
-  I.wait(3);
-  I.saveScreenshot('TC_OP_VOUCHER_002_create_voucher.png');
-});
-
-Scenario('TC_OP_VOUCHER_003: Tìm kiếm voucher', ({ I, operatorVouchersPage }) => {
-  operatorVouchersPage.open();
-  operatorVouchersPage.searchVoucher('TEST');
-  I.wait(3);
-  I.saveScreenshot('TC_OP_VOUCHER_003_search_voucher.png');
-});
-
-// === REPORTS (Báo cáo) ===
-
-Scenario('TC_OP_REPORT_001: Hiển thị trang báo cáo doanh thu', ({ I, operatorReportsPage }) => {
-  operatorReportsPage.open();
-  operatorReportsPage.seeReportsPage();
-  operatorReportsPage.seeStatistics();
-  I.saveScreenshot('TC_OP_REPORT_001_reports_page.png');
+  I.saveScreenshot('TC_OP_ROUTE_006_delete_route.png');
 });

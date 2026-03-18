@@ -1,15 +1,14 @@
 const { I } = inject();
 
 module.exports = {
-
   fields: {
-    email: '//form[@name="operator-login"]//input[contains(@type,"text") or contains(@type,"email")]',
-    password: '//form[@name="operator-login"]//input[@type="password"]',
+    email: 'input[type="email"], input[type="text"]',
+    password: 'input[type="password"]',
   },
 
   buttons: {
-    submit: '//form[@name="operator-login"]//button[@type="submit"]',
-    registerLink: '//a[contains(@href,"/operator/register")]',
+    submit: 'button[type="submit"]',
+    registerLink: 'a[href*="/operator/register"]',
   },
 
   messages: {
@@ -19,7 +18,11 @@ module.exports = {
 
   open() {
     I.amOnPage('/operator/login');
+    I.waitForElement('body', 30);
+    I.wait(5);
+    I.saveScreenshot('DEBUG_operator_login_page.png');
     I.waitForElement(this.fields.email, 30);
+    I.waitForElement(this.fields.password, 30);
   },
 
   fillEmail(email) {
