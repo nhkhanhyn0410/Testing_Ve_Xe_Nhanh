@@ -35,32 +35,23 @@ module.exports = {
     I.click(this.buttons.submit);
   },
 
+  clickRegisterLink() {
+    I.click(this.buttons.register);
+  },
+
   login(email, password) {
     this.fillEmail(email);
     this.fillPassword(password);
     this.clickSubmit();
   },
 
-  loginWithValidUser() {
-    const user = require('../data/users.json').customer.valid;
-    this.login(user.email, user.password);
+  async grabPasswordType() {
+    return I.grabAttributeFrom(this.fields.password, 'type');
   },
 
   seeLoginForm() {
     I.seeElement(this.fields.email);
     I.seeElement(this.fields.password);
     I.seeElement(this.buttons.submit);
-  },
-
-  seeLoginSuccess() {
-    I.wait(5);
-    I.seeInCurrentUrl('/');
-  },
-
-  seeLoginError(message) {
-    I.wait(3);
-    if (message) {
-      I.see(message);
-    }
   }
 };
