@@ -1,10 +1,10 @@
 {
   "customer": {
     "valid": {
-      "email": "nhkyn.0410@gmail.com",
-      "password": "Nhkhanh@0410",
-      "phone": "0901234567",
-      "fullName": "Nguyen Van Khanh"
+      "email": "customer1@gmail.com",
+      "password": "123456",
+      "phone": "0912345678",
+      "fullName": "Nguyễn Văn An"
     },
     "seed": {
       "email": "customer1@gmail.com",
