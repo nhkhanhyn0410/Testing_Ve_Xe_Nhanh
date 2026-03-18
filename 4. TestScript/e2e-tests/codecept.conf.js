@@ -11,7 +11,8 @@ exports.config = {
     Playwright: {
       url: process.env.BASE_URL || 'https://ve-xe-nhanh-testing-frontend.vercel.app',
       show: true,
-      browser: 'chromium',
+      browser: process.env.BROWSER || 'chromium',
+      channel: process.env.CHANNEL || undefined,
       waitForTimeout: 30000,
       waitForAction: 800,
       waitForNavigation: 'networkidle',
@@ -108,6 +109,14 @@ exports.config = {
     smoke: {
       grep: '@smoke',
       browsers: ['chromium']
+    },
+    multibrowser: {
+      chunks: 3,
+      browsers: [
+        { browser: 'chromium' },
+        { browser: 'firefox' },
+        { browser: 'chromium', channel: 'msedge' },
+      ]
     }
   }
 }
