@@ -72,14 +72,18 @@ Scenario('TC_DETAIL_005: Chon nhieu ghe',
   }
 );
 
-Scenario('TC_DETAIL_006: Click vao ghe da duoc dat',
+Scenario('TC_DETAIL_006: Kiem tra trang thai ghe sau khi reload',
   async ({ I, tripsPage, tripDetailPage }) => {
     await openTripDetail(tripsPage);
 
     tripDetailPage.waitForPageLoad();
-    tripDetailPage.clickFirstBookedSeat();
-    tripDetailPage.seeBookedSeatRemainsBooked();
-    I.saveScreenshot('TC_DETAIL_006_click_booked_seat.png');
+    tripDetailPage.selectFirstAvailableSeat();
+    tripDetailPage.seeSeatSelected();
+
+    I.refreshPage();
+    tripDetailPage.waitForPageLoad();
+    tripDetailPage.seeSeatSelected();
+    I.saveScreenshot('TC_DETAIL_006_reload_selected_seat.png');
   }
 );
 
