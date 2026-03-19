@@ -7,7 +7,7 @@ module.exports = {
     name: '//label[contains(.,"Họ và tên")]/ancestor::div[contains(@class,"ant-form-item")]//input',
     phone: '//label[contains(.,"Số điện thoại")]/ancestor::div[contains(@class,"ant-form-item")]//input',
     email: '//label[contains(.,"Email")]/ancestor::div[contains(@class,"ant-form-item")]//input',
-    voucherCode: '//input[contains(@placeholder,"mã giảm giá")]',
+    voucherCode: '//input[contains(@placeholder,"Nhập mã giảm giá")]',
   },
 
   buttons: {
@@ -24,7 +24,7 @@ module.exports = {
 
   messages: {
     holdSuccess: 'Giữ chỗ thành công',
-    bookingSuccess: 'Đặt vé thành công',
+    bookingSuccess: 'Đặt vé thành công!',
   },
 
   waitForPageLoad() {
@@ -74,6 +74,6 @@ module.exports = {
   },
 
   seeBookingSuccess() {
-    I.waitForText('thành công', 30);
+    I.waitForText('Đặt vé thành công!', 30);
   }
 };

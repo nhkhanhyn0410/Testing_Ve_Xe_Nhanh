@@ -8,7 +8,7 @@ Before(({ I, adminLoginPage }) => {
   I.clearCookie();
   adminLoginPage.open();
   adminLoginPage.login(admin.email, admin.password);
-  I.wait(5);
+  I.wait(15);
 });
 
 // === OPERATOR MANAGEMENT (Quản lý nhà xe) ===

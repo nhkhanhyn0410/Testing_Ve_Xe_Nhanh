@@ -46,6 +46,12 @@ module.exports = {
     I.wait(1);
   },
 
+  // Upload ảnh QR từ file (tự động hóa qua hidden input[type="file"])
+  uploadQRImage(filePath) {
+    I.attachFile('input[type="file"]', filePath);
+    I.wait(5); // Chờ decode + verify
+  },
+
   clickStopScanner() {
     I.click(this.buttons.stopScanner);
     I.wait(2);

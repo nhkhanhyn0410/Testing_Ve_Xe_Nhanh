@@ -11,11 +11,11 @@ module.exports = {
   },
 
   buttons: {
-    refresh: '//button[.//span[contains(@class,"ReloadOutlined")]]',
-    viewDetails: '//button[.//span[contains(@class,"EyeOutlined")]]',
-    blockUser: '//button[.//span[contains(@class,"LockOutlined")]]',
-    unblockUser: '//button[.//span[contains(@class,"UnlockOutlined")]]',
-    resetPassword: '//button[.//span[contains(@class,"KeyOutlined")]]',
+    refresh: '//button[.//span[contains(@class,"anticon-reload")]]',
+    viewDetails: '//button[.//span[contains(@class,"anticon-eye")]]',
+    blockUser: '//button[.//span[contains(@class,"anticon-lock")]]',
+    unblockUser: '//button[.//span[contains(@class,"anticon-unlock")]]',
+    resetPassword: '//button[.//span[contains(@class,"anticon-key")]]',
   },
 
   modal: {
@@ -73,8 +73,10 @@ module.exports = {
       ? locate(this.buttons.unblockUser).at(index)
       : locate(this.buttons.unblockUser).first();
     I.click(btn);
+    // Modal.confirm với okText: "Mở khóa"
+    I.waitForElement('.ant-modal-confirm', 10);
     I.wait(1);
-    I.click('//button[contains(.,"OK") or contains(.,"Xác nhận")]');
+    I.click('//div[contains(@class,"ant-modal-confirm")]//button[contains(.,"Mở khóa")]');
     I.wait(3);
   },
 

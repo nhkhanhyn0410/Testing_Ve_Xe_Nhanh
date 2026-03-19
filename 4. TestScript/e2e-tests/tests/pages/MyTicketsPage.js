@@ -16,7 +16,7 @@ module.exports = {
   },
 
   buttons: {
-    viewQR: '//button[contains(@class,"qr") or .//span[contains(@class,"QrcodeOutlined")]]',
+    viewQR: '//button[.//span[contains(@class,"anticon-qrcode")] or contains(.,"QR") or contains(.,"Xem mã QR")]',
     cancelTicket: '//button[contains(@class,"danger") or .//span[contains(@class,"CloseCircleOutlined")]]',
     back: '//button[.//span[contains(@class,"ArrowLeftOutlined")]]',
   },

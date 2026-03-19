@@ -12,9 +12,9 @@ module.exports = {
   },
 
   buttons: {
-    refresh: '//button[.//span[contains(@class,"ReloadOutlined")]]',
-    viewDetails: '//button[.//span[contains(@class,"EyeOutlined")]]',
-    resolve: '//button[.//span[contains(@class,"CheckOutlined")]]',
+    refresh: '//button[.//span[contains(@class,"anticon-reload")]]',
+    viewDetails: '//button[.//span[contains(@class,"anticon-eye")]]',
+    resolve: '//button[.//span[contains(@class,"anticon-check")]]',
   },
 
   modal: {

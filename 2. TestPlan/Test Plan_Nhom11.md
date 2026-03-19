@@ -394,32 +394,34 @@ Documentation</td>
 |---|---|---|---|---|
 | Lập kế hoạch kiểm thử + chuẩn bị mẫu testcase & defect | Khanh (Leader) | 1 ngày | 24/01/2026 | 24/01/2026 |
 | Chuẩn bị dữ liệu kiểm thử (tài khoản, tuyến xe, thanh toán test) | Cả nhóm | 0.5 ngày | 25/01/2026 | 25/01/2026 |
-| Viết testcase và kiểm thử: Đăng ký/Đăng nhập Customer (1) | Thông | 0.5 ngày | 25/01/2026 | 25/01/2026 |
-| Viết testcase và kiểm thử: Tìm kiếm chuyến xe (2) | Trường | 0.5 ngày | 25/01/2026 | 25/01/2026 |
-| Viết testcase và kiểm thử: Xem chi tiết chuyến & sơ đồ ghế (3) | Trường | 0.5 ngày | 26/01/2026 | 26/01/2026 |
-| Viết testcase và kiểm thử: Đặt vé (4) | Khanh | 0.5 ngày | 26/01/2026 | 26/01/2026 |
-| Viết testcase và kiểm thử: Thanh toán (5) | Khanh | 0.5 ngày | 26/01/2026 | 26/01/2026 |
-| Viết testcase và kiểm thử: Xem vé điện tử & mã QR (6) | Khanh | 0.5 ngày | 27/01/2026 | 27/01/2026 |
-| Viết testcase và kiểm thử: Tra cứu vé & xác thực OTP (7) | Thông | 0.5 ngày | 27/01/2026 | 27/01/2026 |
-| Viết testcase và kiểm thử: Hủy vé (8) | Thông | 0.5 ngày | 27/01/2026 | 27/01/2026 |
-| Viết testcase và kiểm thử: Khiếu nại (9) | Thông | 0.5 ngày | 28/01/2026 | 28/01/2026 |
-| Viết testcase và kiểm thử: Quản lý hồ sơ cá nhân (10) | Khanh | 0.5 ngày | 28/01/2026 | 28/01/2026 |
-| Viết testcase và kiểm thử: Tích điểm thưởng (11) | Thông | 0.5 ngày | 28/01/2026 | 28/01/2026 |
-| Viết testcase và kiểm thử: Operator - Đăng ký/Đăng nhập (12) | Thông | 0.5 ngày | 28/01/2026 | 28/01/2026 |
-| Viết testcase và kiểm thử: Operator - Quản lý tuyến đường (13) | Trường | 0.5 ngày | 29/01/2026 | 29/01/2026 |
-| Viết testcase và kiểm thử: Operator - Quản lý xe (14) | Khanh | 0.5 ngày | 29/01/2026 | 29/01/2026 |
-| Viết testcase và kiểm thử: Operator - Quản lý nhân viên (15) | Trường | 0.5 ngày | 29/01/2026 | 29/01/2026 |
-| Viết testcase và kiểm thử: Operator - Quản lý lịch trình (16) | Trường | 0.5 ngày | 29/01/2026 | 29/01/2026 |
-| Viết testcase và kiểm thử: Operator - Quản lý voucher (17) | Trường | 0.5 ngày | 30/01/2026 | 30/01/2026 |
-| Viết testcase và kiểm thử: Operator - Xem báo cáo (18) | Trường | 0.5 ngày | 30/01/2026 | 30/01/2026 |
-| Viết testcase và kiểm thử: Trip Manager - Đăng nhập (19) | Thông | 0.5 ngày | 30/01/2026 | 30/01/2026 |
-| Viết testcase và kiểm thử: Trip Manager - Quét QR check-in (20) | Khanh | 0.5 ngày | 30/01/2026 | 30/01/2026 |
-| Viết testcase và kiểm thử: Trip Manager - Trạng thái chuyến (21) | Khanh | 0.5 ngày | 31/01/2026 | 31/01/2026 |
-| Viết testcase và kiểm thử: Admin - Đăng nhập (22) | Thông | 0.5 ngày | 31/01/2026 | 31/01/2026 |
-| Viết testcase và kiểm thử: Admin - Quản lý nhà xe (23) | Trường | 0.5 ngày | 31/01/2026 | 31/01/2026 |
-| Viết testcase và kiểm thử: Admin - Quản lý người dùng (24) | Khanh | 0.5 ngày | 31/01/2026 | 31/01/2026 |
-| Viết testcase và kiểm thử: Admin - Quản lý khiếu nại (25) | Khanh | 0.5 ngày | 01/02/2026 | 01/02/2026 |
-| Viết testcase và kiểm thử: Admin - Quản lý nội dung (26) | Khanh | 0.5 ngày | 01/02/2026 | 01/02/2026 |
+| Thực thi Unit Test: Xác thực định dạng email (1), SĐT (2), CCCD (3) | Khanh | 0.5 ngày | 25/01/2026 | 25/01/2026 |
+| Thực thi Unit Test: Xác thực số tiền (4), Tính điểm tích lũy (5) | Khanh | 0.5 ngày | 25/01/2026 | 25/01/2026 |
+| Viết testcase và kiểm thử: Đăng ký/Đăng nhập Customer (6) | Thông | 0.5 ngày | 26/01/2026 | 26/01/2026 |
+| Viết testcase và kiểm thử: Tìm kiếm chuyến xe (7) | Trường | 0.5 ngày | 26/01/2026 | 26/01/2026 |
+| Viết testcase và kiểm thử: Xem chi tiết chuyến & sơ đồ ghế (8) | Trường | 0.5 ngày | 26/01/2026 | 26/01/2026 |
+| Viết testcase và kiểm thử: Đặt vé (9) | Khanh | 0.5 ngày | 26/01/2026 | 26/01/2026 |
+| Viết testcase và kiểm thử: Thanh toán (10) | Khanh | 0.5 ngày | 26/01/2026 | 26/01/2026 |
+| Viết testcase và kiểm thử: Xem vé điện tử & mã QR (11) | Khanh | 0.5 ngày | 27/01/2026 | 27/01/2026 |
+| Viết testcase và kiểm thử: Tra cứu vé & xác thực OTP (12) | Thông | 0.5 ngày | 27/01/2026 | 27/01/2026 |
+| Viết testcase và kiểm thử: Hủy vé (13) | Thông | 0.5 ngày | 27/01/2026 | 27/01/2026 |
+| Viết testcase và kiểm thử: Khiếu nại (14) | Thông | 0.5 ngày | 27/01/2026 | 27/01/2026 |
+| Viết testcase và kiểm thử: Quản lý hồ sơ cá nhân (15) | Khanh | 0.5 ngày | 28/01/2026 | 28/01/2026 |
+| Viết testcase và kiểm thử: Tích điểm thưởng (16) | Thông | 0.5 ngày | 28/01/2026 | 28/01/2026 |
+| Viết testcase và kiểm thử: Operator - Đăng ký/Đăng nhập (17) | Thông | 0.5 ngày | 28/01/2026 | 28/01/2026 |
+| Viết testcase và kiểm thử: Operator - Quản lý tuyến đường (18) | Trường | 0.5 ngày | 28/01/2026 | 28/01/2026 |
+| Viết testcase và kiểm thử: Operator - Quản lý xe (19) | Khanh | 0.5 ngày | 29/01/2026 | 29/01/2026 |
+| Viết testcase và kiểm thử: Operator - Quản lý nhân viên (20) | Trường | 0.5 ngày | 29/01/2026 | 29/01/2026 |
+| Viết testcase và kiểm thử: Operator - Quản lý lịch trình (21) | Trường | 0.5 ngày | 29/01/2026 | 29/01/2026 |
+| Viết testcase và kiểm thử: Operator - Quản lý voucher (22) | Trường | 0.5 ngày | 29/01/2026 | 29/01/2026 |
+| Viết testcase và kiểm thử: Operator - Xem báo cáo (23) | Thông, Trường | 0.5 ngày | 30/01/2026 | 30/01/2026 |
+| Viết testcase và kiểm thử: Trip Manager - Đăng nhập (24) | Khanh | 0.5 ngày | 30/01/2026 | 30/01/2026 |
+| Viết testcase và kiểm thử: Trip Manager - Quét QR check-in (25) | Khanh | 0.5 ngày | 30/01/2026 | 30/01/2026 |
+| Viết testcase và kiểm thử: Trip Manager - Trạng thái chuyến (26) | Khanh | 0.5 ngày | 30/01/2026 | 30/01/2026 |
+| Viết testcase và kiểm thử: Admin - Đăng nhập (27) | Thông | 0.5 ngày | 31/01/2026 | 31/01/2026 |
+| Viết testcase và kiểm thử: Admin - Quản lý nhà xe (28) | Trường | 0.5 ngày | 31/01/2026 | 31/01/2026 |
+| Viết testcase và kiểm thử: Admin - Quản lý người dùng (29) | Khanh | 0.5 ngày | 31/01/2026 | 31/01/2026 |
+| Viết testcase và kiểm thử: Admin - Quản lý khiếu nại (30) | Khanh | 0.5 ngày | 01/02/2026 | 01/02/2026 |
+| Viết testcase và kiểm thử: Admin - Quản lý nội dung (31) | Khanh | 0.5 ngày | 01/02/2026 | 01/02/2026 |
 | Tổng hợp danh sách lỗi theo mức độ nghiêm trọng | Khanh (Leader) | 1 ngày | 01/02/2026 | 01/02/2026 |
 | Kiểm thử lại toàn bộ hệ thống sau khi sửa lỗi (Regression test) | Cả nhóm | 1 ngày | 02/02/2026 | 02/02/2026 |
 | Tổng hợp kết quả kiểm thử + lập báo cáo cuối + bàn giao | Khanh (Leader) | 1 ngày | 03/02/2026 | 03/02/2026 |

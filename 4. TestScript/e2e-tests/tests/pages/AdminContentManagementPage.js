@@ -15,8 +15,8 @@ module.exports = {
     createBanner: '//button[contains(.,"Thêm Banner") or contains(.,"Tạo Banner")]',
     createBlog: '//button[contains(.,"Thêm Blog") or contains(.,"Tạo Blog")]',
     createFAQ: '//button[contains(.,"Thêm FAQ") or contains(.,"Tạo FAQ")]',
-    edit: '//button[.//span[contains(@class,"EditOutlined")]]',
-    delete: '//button[contains(@class,"danger") or .//span[contains(@class,"DeleteOutlined")]]',
+    edit: '//button[.//span[contains(@class,"anticon-edit")]]',
+    delete: '//button[contains(@class,"danger") or .//span[contains(@class,"anticon-delete")]]',
   },
 
   modal: {

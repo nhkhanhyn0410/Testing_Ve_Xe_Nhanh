@@ -12,7 +12,7 @@ module.exports = {
   },
 
   buttons: {
-    viewQR: '//button[contains(.,"QR")]',
+    viewQR: '//button[contains(.,"Xem mã QR") or .//span[contains(@class,"anticon-qrcode")]]',
     printTicket: '//button[contains(.,"In vé")]',
     home: '//button[contains(.,"Trang chủ")]',
     myBookings: '//button[contains(.,"đặt vé") or contains(.,"booking")]',
@@ -29,12 +29,12 @@ module.exports = {
   },
 
   waitForPageLoad() {
-    I.waitForText('thành công', 30);
+    I.waitForText('Đặt vé thành công!', 30);
     I.wait(3);
   },
 
   seeBookingSuccess() {
-    I.see('thành công');
+    I.see('Đặt vé thành công!');
   },
 
   seeBookingCode() {

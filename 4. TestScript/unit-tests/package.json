@@ -1,0 +1,14 @@
+{
+  "name": "vexenhanh-unit-tests",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "jest --config jest.config.js --verbose",
+    "test:validators": "jest validators.test.js --verbose",
+    "test:helpers": "jest helpers.test.js --verbose",
+    "test:constants": "jest constants.test.js --verbose",
+    "test:coverage": "jest --config jest.config.js --coverage"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

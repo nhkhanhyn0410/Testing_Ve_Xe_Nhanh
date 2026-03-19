@@ -20,7 +20,7 @@ Scenario('TC_TM_002: Đăng nhập Trip Manager thành công', ({ I, tripManager
   const tm = users.tripManager.valid;
   tripManagerLoginPage.open();
   tripManagerLoginPage.login(tm.employeeCode, tm.password);
-  I.wait(5);
+  I.wait(15);
   I.seeInCurrentUrl('/trip-manager');
   I.saveScreenshot('TC_TM_002_login_success.png');
 });

@@ -3,12 +3,12 @@ const { I } = inject();
 module.exports = {
 
   fields: {
-    email: '//form[@name="admin-login"]//input[contains(@type,"text") or contains(@type,"email")]',
-    password: '//form[@name="admin-login"]//input[@type="password"]',
+    email: '#admin-login_email',
+    password: '#admin-login_password',
   },
 
   buttons: {
-    submit: '//form[@name="admin-login"]//button[@type="submit"]',
+    submit: '//button[@type="submit" and (contains(.,"Đăng Nhập") or contains(.,"Đang đăng nhập"))]',
     homeLink: '//a[contains(@href,"/")]',
   },
 

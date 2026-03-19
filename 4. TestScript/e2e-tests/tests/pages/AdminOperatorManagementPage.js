@@ -11,12 +11,12 @@ module.exports = {
   },
 
   buttons: {
-    refresh: '//button[.//span[contains(@class,"ReloadOutlined")]]',
-    viewDetails: '//button[.//span[contains(@class,"EyeOutlined")]]',
-    approve: '//button[.//span[contains(@class,"CheckOutlined")]]',
-    reject: '//button[contains(@class,"danger") and .//span[contains(@class,"CloseOutlined")]]',
-    suspend: '//button[contains(@class,"danger") and .//span[contains(@class,"StopOutlined")]]',
-    unsuspend: '//button[contains(.,"Mở khóa") or .//span[contains(@class,"UnlockOutlined")]]',
+    refresh: '//button[.//span[contains(@class,"anticon-reload")]]',
+    viewDetails: '//button[.//span[contains(@class,"anticon-eye")]]',
+    approve: '//button[.//span[contains(@class,"anticon-check")]]',
+    reject: '//button[.//span[contains(@class,"anticon-close")]]',
+    suspend: '//button[.//span[contains(@class,"anticon-stop")]]',
+    resume: '//button[.//span[contains(@class,"anticon-play-circle")]]',
   },
 
   modal: {
@@ -44,11 +44,6 @@ module.exports = {
     I.wait(2);
   },
 
-  clickRefresh() {
-    I.click(this.buttons.refresh);
-    I.wait(3);
-  },
-
   clickViewDetails(index) {
     const btn = index
       ? locate(this.buttons.viewDetails).at(index)
@@ -57,35 +52,53 @@ module.exports = {
     I.waitForElement(this.modal.detailModal, 10);
   },
 
+  // Duyệt nhà xe: Modal.confirm → okText: "Duyệt"
   clickApprove(index) {
     const btn = index
       ? locate(this.buttons.approve).at(index)
       : locate(this.buttons.approve).first();
     I.click(btn);
+    I.waitForElement('.ant-modal-confirm', 10);
     I.wait(1);
-    I.click('//button[contains(.,"OK") or contains(.,"Xác nhận")]');
+    I.click('//div[contains(@class,"ant-modal-confirm")]//button[contains(.,"Duyệt")]');
     I.wait(3);
   },
 
+  // Từ chối nhà xe: Modal thường → okText: "Từ Chối"
   clickReject(index, reason) {
     const btn = index
       ? locate(this.buttons.reject).at(index)
       : locate(this.buttons.reject).first();
     I.click(btn);
     I.waitForElement(this.modal.rejectModal, 10);
+    I.wait(1);
     if (reason) I.fillField(this.modal.reason, reason);
     I.click(this.modal.confirmAction);
     I.wait(3);
   },
 
+  // Tạm ngưng nhà xe: Modal thường → okText: "Tạm Ngưng"
   clickSuspend(index, reason) {
     const btn = index
       ? locate(this.buttons.suspend).at(index)
       : locate(this.buttons.suspend).first();
     I.click(btn);
     I.waitForElement(this.modal.suspendModal, 10);
+    I.wait(1);
     if (reason) I.fillField(this.modal.reason, reason);
     I.click(this.modal.confirmAction);
+    I.wait(3);
+  },
+
+  // Khôi phục nhà xe: Modal.confirm → okText: "Khôi Phục"
+  clickResume(index) {
+    const btn = index
+      ? locate(this.buttons.resume).at(index)
+      : locate(this.buttons.resume).first();
+    I.click(btn);
+    I.waitForElement('.ant-modal-confirm', 10);
+    I.wait(1);
+    I.click('//div[contains(@class,"ant-modal-confirm")]//button[contains(.,"Khôi Phục")]');
     I.wait(3);
   },
 
@@ -107,6 +120,6 @@ module.exports = {
   },
 
   seeActionSuccess() {
-    I.seeElement(this.messages.success);
+    I.waitForElement(this.messages.success, 10);
   },
 };

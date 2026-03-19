@@ -3,12 +3,12 @@ const { I } = inject();
 module.exports = {
 
   fields: {
-    employeeCode: '//form[@name="trip-manager-login"]//input[contains(@placeholder,"EMP")]',
-    password: '//form[@name="trip-manager-login"]//input[@type="password"]',
+    employeeCode: '#trip-manager-login_employeeCode',
+    password: '#trip-manager-login_password',
   },
 
   buttons: {
-    submit: '//form[@name="trip-manager-login"]//button[@type="submit"]',
+    submit: '//button[@type="submit" and (contains(.,"Đăng Nhập") or contains(.,"Đang đăng nhập"))]',
     homeLink: '//a[contains(@href,"/")]',
   },
 

@@ -8,7 +8,7 @@ Before(({ I, operatorLoginPage }) => {
   I.clearCookie();
   operatorLoginPage.open();
   operatorLoginPage.login(operator.email, operator.password);
-  I.wait(5);
+  I.wait(15);
 });
 
 // === ROUTES (Tuyến đường) ===

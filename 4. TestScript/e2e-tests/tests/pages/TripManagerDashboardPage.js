@@ -46,6 +46,19 @@ module.exports = {
     I.wait(3);
   },
 
+  // Bắt đầu chuyến gần nhất (cuối bảng, ngày gần nhất)
+  startNearestTrip() {
+    // Click nút "Bắt đầu" cuối cùng (chuyến có ngày gần nhất)
+    I.click(locate(this.buttons.startTrip).last());
+    // Chờ modal confirm hiện ra
+    I.waitForElement('.ant-modal-confirm', 10);
+    I.wait(1);
+    // Click nút xác nhận "Bắt đầu" trong modal
+    I.click('//div[contains(@class,"ant-modal-confirm")]//button[contains(.,"Bắt đầu")]');
+    // Chờ API call + navigate (Render cold start có thể mất 10-30s)
+    I.waitInUrl('/trip-manager/active-trip', 30);
+  },
+
   clickCompleteTrip(index) {
     const btn = index
       ? locate(this.buttons.completeTrip).at(index)
