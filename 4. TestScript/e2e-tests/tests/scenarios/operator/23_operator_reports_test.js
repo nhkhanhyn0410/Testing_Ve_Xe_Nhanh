@@ -12,7 +12,7 @@ Before(({ I, operatorLoginPage }) => {
   I.waitForElement('body', 30);
   I.waitForInvisible('.ant-spin-spinning', 10);
   I.wait(2);
-  I.seeInCurrentUrl('/operator/dashboard');
+  I.seeInCurrentUrl('/operator');
 });
 
 Scenario('TC_OP_RPT_001: Hiển thị trang báo cáo doanh thu', ({ I, operatorReportsPage }) => {
