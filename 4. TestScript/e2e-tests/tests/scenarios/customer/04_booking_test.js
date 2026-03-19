@@ -6,9 +6,6 @@ const customer = users.customer.valid;
 const route = users.booking.routes.default;
 const bookingDate = users.booking.daysFromNow;
 
-// ========================================================================================
-// Helper: Login → Search → Chọn ghế → Chọn điểm đón/trả → Click Tiếp tục → Đến form TT
-// ========================================================================================
 async function goToPassengerInfoStep(I, loginPage, tripsPage, tripDetailPage) {
   loginPage.open();
   loginPage.login(customer.email, customer.password);
@@ -33,9 +30,6 @@ Before(({ I }) => {
   I.clearCookie();
 });
 
-// ========================================================================================
-// TC_BK_001: Full E2E - Login → Tìm → Chọn ghế → Điền TT → Thanh toán tiền mặt
-// ========================================================================================
 Scenario('TC_BK_001: Full E2E booking thanh toán tiền mặt',
   async ({ I, loginPage, tripsPage, tripDetailPage, passengerInfoPage }) => {
     await goToPassengerInfoStep(I, loginPage, tripsPage, tripDetailPage);
@@ -53,9 +47,6 @@ Scenario('TC_BK_001: Full E2E booking thanh toán tiền mặt',
   }
 );
 
-// ========================================================================================
-// TC_BK_002: DT - Tên hợp lệ, SĐT hợp lệ, Email hợp lệ → chuyển sang thanh toán
-// ========================================================================================
 Scenario('TC_BK_002: DT - Thông tin hợp lệ → chuyển bước thanh toán',
   async ({ I, loginPage, tripsPage, tripDetailPage, passengerInfoPage }) => {
     await goToPassengerInfoStep(I, loginPage, tripsPage, tripDetailPage);
@@ -69,9 +60,6 @@ Scenario('TC_BK_002: DT - Thông tin hợp lệ → chuyển bước thanh toán
   }
 );
 
-// ========================================================================================
-// TC_BK_003: DT - Tên trống → hiển thị lỗi
-// ========================================================================================
 Scenario('TC_BK_003: DT - Tên trống → hiển thị lỗi',
   async ({ I, loginPage, tripsPage, tripDetailPage, passengerInfoPage }) => {
     await goToPassengerInfoStep(I, loginPage, tripsPage, tripDetailPage);
@@ -88,9 +76,6 @@ Scenario('TC_BK_003: DT - Tên trống → hiển thị lỗi',
   }
 );
 
-// ========================================================================================
-// TC_BK_004: DT - SĐT trống → hiển thị lỗi
-// ========================================================================================
 Scenario('TC_BK_004: DT - SĐT trống → hiển thị lỗi',
   async ({ I, loginPage, tripsPage, tripDetailPage, passengerInfoPage }) => {
     await goToPassengerInfoStep(I, loginPage, tripsPage, tripDetailPage);
@@ -107,9 +92,6 @@ Scenario('TC_BK_004: DT - SĐT trống → hiển thị lỗi',
   }
 );
 
-// ========================================================================================
-// TC_BK_005: DT - Email trống → hiển thị lỗi
-// ========================================================================================
 Scenario('TC_BK_005: DT - Email trống → hiển thị lỗi',
   async ({ I, loginPage, tripsPage, tripDetailPage, passengerInfoPage }) => {
     await goToPassengerInfoStep(I, loginPage, tripsPage, tripDetailPage);
@@ -126,9 +108,6 @@ Scenario('TC_BK_005: DT - Email trống → hiển thị lỗi',
   }
 );
 
-// ========================================================================================
-// TC_BK_006: DT - Tất cả trường trống
-// ========================================================================================
 Scenario('TC_BK_006: DT - Tất cả trường trống → hiển thị 3 lỗi',
   async ({ I, loginPage, tripsPage, tripDetailPage, passengerInfoPage }) => {
     await goToPassengerInfoStep(I, loginPage, tripsPage, tripDetailPage);
@@ -147,9 +126,6 @@ Scenario('TC_BK_006: DT - Tất cả trường trống → hiển thị 3 lỗi'
   }
 );
 
-// ========================================================================================
-// TC_BK_007: BVA - SĐT 9 chữ số (dưới biên min)
-// ========================================================================================
 Scenario('TC_BK_007: BVA - SĐT 9 số → lỗi',
   async ({ I, loginPage, tripsPage, tripDetailPage, passengerInfoPage }) => {
     await goToPassengerInfoStep(I, loginPage, tripsPage, tripDetailPage);
@@ -165,9 +141,6 @@ Scenario('TC_BK_007: BVA - SĐT 9 số → lỗi',
   }
 );
 
-// ========================================================================================
-// TC_BK_008: BVA - SĐT đúng 10 chữ số (đúng biên)
-// ========================================================================================
 Scenario('TC_BK_008: BVA - SĐT 10 số → hợp lệ',
   async ({ I, loginPage, tripsPage, tripDetailPage, passengerInfoPage }) => {
     await goToPassengerInfoStep(I, loginPage, tripsPage, tripDetailPage);
@@ -181,9 +154,6 @@ Scenario('TC_BK_008: BVA - SĐT 10 số → hợp lệ',
   }
 );
 
-// ========================================================================================
-// TC_BK_009: BVA - SĐT 11 chữ số (trên biên max)
-// ========================================================================================
 Scenario('TC_BK_009: BVA - SĐT 11 số → lỗi',
   async ({ I, loginPage, tripsPage, tripDetailPage, passengerInfoPage }) => {
     await goToPassengerInfoStep(I, loginPage, tripsPage, tripDetailPage);
@@ -199,9 +169,6 @@ Scenario('TC_BK_009: BVA - SĐT 11 số → lỗi',
   }
 );
 
-// ========================================================================================
-// TC_BK_010: EP - SĐT chứa chữ cái
-// ========================================================================================
 Scenario('TC_BK_010: EP - SĐT chứa chữ cái → lỗi',
   async ({ I, loginPage, tripsPage, tripDetailPage, passengerInfoPage }) => {
     await goToPassengerInfoStep(I, loginPage, tripsPage, tripDetailPage);
@@ -217,9 +184,6 @@ Scenario('TC_BK_010: EP - SĐT chứa chữ cái → lỗi',
   }
 );
 
-// ========================================================================================
-// TC_BK_011: EP - SĐT không bắt đầu bằng 0
-// ========================================================================================
 Scenario('TC_BK_011: EP - SĐT không bắt đầu bằng 0 → lỗi',
   async ({ I, loginPage, tripsPage, tripDetailPage, passengerInfoPage }) => {
     await goToPassengerInfoStep(I, loginPage, tripsPage, tripDetailPage);
@@ -235,9 +199,6 @@ Scenario('TC_BK_011: EP - SĐT không bắt đầu bằng 0 → lỗi',
   }
 );
 
-// ========================================================================================
-// TC_BK_012: EP - Email thiếu @
-// ========================================================================================
 Scenario('TC_BK_012: EP - Email thiếu @ → lỗi',
   async ({ I, loginPage, tripsPage, tripDetailPage, passengerInfoPage }) => {
     await goToPassengerInfoStep(I, loginPage, tripsPage, tripDetailPage);
@@ -253,9 +214,6 @@ Scenario('TC_BK_012: EP - Email thiếu @ → lỗi',
   }
 );
 
-// ========================================================================================
-// TC_BK_013: EP - Email thiếu domain
-// ========================================================================================
 Scenario('TC_BK_013: EP - Email thiếu domain → lỗi',
   async ({ I, loginPage, tripsPage, tripDetailPage, passengerInfoPage }) => {
     await goToPassengerInfoStep(I, loginPage, tripsPage, tripDetailPage);
@@ -271,9 +229,6 @@ Scenario('TC_BK_013: EP - Email thiếu domain → lỗi',
   }
 );
 
-// ========================================================================================
-// TC_BK_014: EP - Email thiếu local part
-// ========================================================================================
 Scenario('TC_BK_014: EP - Email thiếu local part → lỗi',
   async ({ I, loginPage, tripsPage, tripDetailPage, passengerInfoPage }) => {
     await goToPassengerInfoStep(I, loginPage, tripsPage, tripDetailPage);
@@ -289,9 +244,6 @@ Scenario('TC_BK_014: EP - Email thiếu local part → lỗi',
   }
 );
 
-// ========================================================================================
-// TC_BK_015: Áp dụng voucher hợp lệ
-// ========================================================================================
 Scenario('TC_BK_015: Áp dụng voucher hợp lệ → giảm giá',
   async ({ I, loginPage, tripsPage, tripDetailPage, passengerInfoPage }) => {
     await goToPassengerInfoStep(I, loginPage, tripsPage, tripDetailPage);
@@ -309,9 +261,6 @@ Scenario('TC_BK_015: Áp dụng voucher hợp lệ → giảm giá',
   }
 );
 
-// ========================================================================================
-// TC_BK_016: Áp dụng voucher không hợp lệ / hết hạn
-// ========================================================================================
 Scenario('TC_BK_016: Áp dụng voucher không hợp lệ → hiển thị lỗi',
   async ({ I, loginPage, tripsPage, tripDetailPage, passengerInfoPage }) => {
     await goToPassengerInfoStep(I, loginPage, tripsPage, tripDetailPage);
