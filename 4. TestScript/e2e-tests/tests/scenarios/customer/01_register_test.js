@@ -8,7 +8,7 @@ Before(({ I }) => {
   I.clearCookie();
 });
 
-Scenario("TC_REG_009: Hiển thị form đăng ký", ({ I, registerPage }) => {
+Scenario("TC_AUTH_009: Hiển thị form đăng ký", ({ I, registerPage }) => {
   registerPage.open();
   registerPage.seeRegisterForm();
   I.see("Đăng Ký");
@@ -16,7 +16,7 @@ Scenario("TC_REG_009: Hiển thị form đăng ký", ({ I, registerPage }) => {
 });
 
 Scenario(
-  "TC_REG_010: Đăng ký thành công với thông tin hợp lệ",
+  "TC_AUTH_010: Đăng ký thành công với thông tin hợp lệ",
   ({ I, registerPage }) => {
     const user = dataGenerator.generateUser();
     registerPage.open();
@@ -26,7 +26,7 @@ Scenario(
   },
 );
 
-Scenario("TC_REG_011: Đăng ký với email đã tồn tại", ({ I, registerPage }) => {
+Scenario("TC_AUTH_011: Đăng ký với email đã tồn tại", ({ I, registerPage }) => {
   const testData = require("../../data/users.json");
   const existingUser = testData.customer.valid;
   const user = dataGenerator.generateUser();
@@ -43,7 +43,7 @@ Scenario("TC_REG_011: Đăng ký với email đã tồn tại", ({ I, registerPa
 });
 
 Scenario(
-  "TC_REG_012: Đăng ký với các trường bắt buộc để trống",
+  "TC_AUTH_012: Đăng ký với các trường bắt buộc để trống",
   ({ I, registerPage }) => {
     registerPage.open();
     registerPage.clickSubmit();
@@ -53,7 +53,7 @@ Scenario(
 );
 
 Scenario(
-  "TC_REG_013: Đăng ký với email không hợp lệ",
+  "TC_AUTH_013: Đăng ký với email không hợp lệ",
   ({ I, registerPage }) => {
     const user = dataGenerator.generateUser();
     registerPage.open();
@@ -68,7 +68,7 @@ Scenario(
   },
 );
 
-Scenario("TC_REG_014: Đăng ký với SĐT không hợp lệ", ({ I, registerPage }) => {
+Scenario("TC_AUTH_014: Đăng ký với SĐT không hợp lệ", ({ I, registerPage }) => {
   const user = dataGenerator.generateUser();
   registerPage.open();
   registerPage.register(user.fullName, user.email, "123", user.password);
@@ -76,7 +76,7 @@ Scenario("TC_REG_014: Đăng ký với SĐT không hợp lệ", ({ I, registerPa
   I.saveScreenshot("TC_REG_006_invalid_phone.png");
 });
 
-Scenario("TC_REG_015: Đăng ký với mật khẩu yếu", ({ I, registerPage }) => {
+Scenario("TC_AUTH_015: Đăng ký với mật khẩu yếu", ({ I, registerPage }) => {
   const user = dataGenerator.generateUser();
   registerPage.open();
   registerPage.register(user.fullName, user.email, user.phone, "123");
@@ -85,7 +85,7 @@ Scenario("TC_REG_015: Đăng ký với mật khẩu yếu", ({ I, registerPage }
 });
 
 Scenario(
-  "TC_REG_016: Đăng ký với mật khẩu xác nhận không khớp",
+  "TC_AUTH_016: Đăng ký với mật khẩu xác nhận không khớp",
   ({ I, registerPage }) => {
     const user = dataGenerator.generateUser();
     registerPage.open();
@@ -101,7 +101,7 @@ Scenario(
 );
 
 Scenario(
-  "TC_REG_017: Chuyển sang trang đăng nhập từ form đăng ký",
+  "TC_AUTH_017: Chuyển sang trang đăng nhập từ form đăng ký",
   ({ I, registerPage }) => {
     registerPage.open();
     registerPage.clickLoginLink();
