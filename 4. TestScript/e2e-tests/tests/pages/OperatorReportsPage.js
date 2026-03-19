@@ -1,71 +1,67 @@
 const { I } = inject();
 
 module.exports = {
-
   elements: {
-    revenueChart: '//div[contains(@class,"recharts") or contains(@class,"chart")]',
-    topRoutesTable: '.ant-table',
-    statsCards: '.ant-statistic',
-    dateRangePicker: '.ant-picker-range',
-    routeFilter: '//div[contains(@class,"ant-select")]',
-  },
-
-  buttons: {
-    exportExcel: '//button[.//span[contains(@class,"FileExcelOutlined")] or contains(.,"Excel")]',
-    exportPDF: '//button[.//span[contains(@class,"FilePdfOutlined")] or contains(.,"PDF")]',
-  },
-
-  messages: {
-    success: '.ant-message-success',
-    error: '.ant-message-error',
+    pageHeading: '//*[contains(normalize-space(.),"Báo Cáo Doanh Thu") or contains(normalize-space(.),"Báo cáo doanh thu")]',
+    statsCards: '.ant-statistic, .ant-card .ant-statistic, .ant-card',
+    totalRevenueCard: '//*[contains(normalize-space(.),"Tổng Doanh Thu")]',
+    totalTransactionsCard: '//*[contains(normalize-space(.),"Số Giao Dịch")]',
+    revenueChartSection: '//*[contains(normalize-space(.),"Xu Hướng Doanh Thu")]',
+    revenueChartCanvas:
+      '//*[contains(normalize-space(.),"Xu Hướng Doanh Thu")]/ancestor::div[contains(@class,"ant-card")][1]//*[name()="svg" or contains(@class,"recharts-wrapper") or contains(@class,"recharts-responsive-container")]',
+    cancellationStatsSection: '//*[contains(normalize-space(.),"Thống Kê Hủy Vé")]',
+    totalCancelledText: '//*[contains(normalize-space(.),"Tổng Hủy")]',
+    cancellationByRouteText: '//*[contains(normalize-space(.),"Hủy Theo Tuyến")]',
+    loadingSpinner: '.ant-spin-spinning',
+    sideMenuReports: '//a[@href="/operator/reports"] | //span[contains(normalize-space(.),"Báo Cáo")] | //span[contains(normalize-space(.),"Báo cáo")]',
   },
 
   open() {
     I.amOnPage('/operator/reports');
+    this.waitForPageReady();
+  },
+
+  waitForPageReady() {
     I.waitForElement('body', 30);
-    I.waitForInvisible('.ant-spin', 30);
-    I.wait(3);
-  },
-
-  selectDateRange(startDate, endDate) {
-    I.click(this.elements.dateRangePicker);
+    I.waitForInvisible(this.elements.loadingSpinner, 10);
+    I.waitForElement(this.elements.pageHeading, 20);
     I.wait(1);
-    I.fillField(locate('.ant-picker-input input').first(), startDate);
-    I.fillField(locate('.ant-picker-input input').last(), endDate);
-    I.pressKey('Enter');
-    I.wait(3);
   },
 
-  filterByRoute(routeName) {
-    I.click(this.elements.routeFilter);
-    I.wait(1);
-    I.click(`//div[contains(@class,"ant-select-item") and contains(.,"${routeName}")]`);
-    I.wait(3);
-  },
-
-  clickExportExcel() {
-    I.click(this.buttons.exportExcel);
-    I.wait(3);
-  },
-
-  clickExportPDF() {
-    I.click(this.buttons.exportPDF);
-    I.wait(3);
+  goToReportsFromMenu() {
+    I.waitForElement(this.elements.sideMenuReports, 15);
+    I.click(this.elements.sideMenuReports);
+    I.wait(2);
+    I.seeInCurrentUrl('/operator/reports');
+    this.waitForPageReady();
   },
 
   seeReportsPage() {
+    I.waitForElement(this.elements.pageHeading, 15);
+    I.see('Báo Cáo Doanh Thu');
     I.seeElement(this.elements.statsCards);
+  },
+
+  seeSummaryStatistics() {
+    I.waitForElement(this.elements.totalRevenueCard, 15);
+    I.waitForElement(this.elements.totalTransactionsCard, 15);
+    I.see('Tổng Doanh Thu');
+    I.see('Số Giao Dịch');
   },
 
   seeRevenueChart() {
-    I.seeElement(this.elements.revenueChart);
+    I.waitForElement(this.elements.revenueChartSection, 15);
+    I.see('Xu Hướng Doanh Thu');
+    I.waitForElement(this.elements.revenueChartCanvas, 15);
+    I.seeElement(this.elements.revenueChartCanvas);
   },
 
-  seeTopRoutesTable() {
-    I.seeElement(this.elements.topRoutesTable);
-  },
-
-  seeStatistics() {
-    I.seeElement(this.elements.statsCards);
+  seeCancellationStatistics() {
+    I.waitForElement(this.elements.cancellationStatsSection, 15);
+    I.see('Thống Kê Hủy Vé');
+    I.waitForElement(this.elements.totalCancelledText, 15);
+    I.waitForElement(this.elements.cancellationByRouteText, 15);
+    I.see('Tổng Hủy');
+    I.see('Hủy Theo Tuyến');
   },
 };
