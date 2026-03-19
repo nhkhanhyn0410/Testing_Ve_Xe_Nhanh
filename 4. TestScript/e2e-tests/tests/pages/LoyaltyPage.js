@@ -1,92 +1,102 @@
 const { I } = inject();
 
 module.exports = {
-
   elements: {
-    currentTier: '//span[contains(@class,"ant-tag")]',
-    totalPoints: '//div[contains(.,"điểm")]//span[contains(@class,"ant-statistic-content-value")]',
-    progressBar: '//div[contains(@class,"progress")]',
-    tierRoadmap: '//div[contains(@class,"tier") or contains(@class,"roadmap")]',
-    benefitsList: '//ul | //div[contains(@class,"benefit")]',
+    totalPoints: '//div[contains(.,"điểm") or contains(.,"Điểm")]',
+    tierTag: '//span[contains(@class,"ant-tag")]',
+    benefitsArea:
+      '//div[contains(@class,"benefit") or contains(.,"Quyền lợi") or contains(.,"Đặc quyền")]',
+    loyaltyProgramText:
+      '//*[contains(.,"Loyalty program") or contains(.,"Loyalty Program") or contains(.,"Điểm thưởng") or contains(.,"Diem thuong")]',
   },
 
-  buttons: {
-    redeemPoints: '//button[contains(.,"Đổi điểm") or .//span[contains(@class,"GiftOutlined")]]',
-    viewHistory: '//button[contains(.,"Lịch sử") or .//span[contains(@class,"HistoryOutlined")]]',
-    back: '//button[.//span[contains(@class,"ArrowLeftOutlined")]]',
+  tabs: {
+    history:
+      '//button[contains(.,"Lịch sử") or contains(.,"Lich su") or contains(.,"History")]',
+    redeem:
+      '//button[contains(.,"Đổi điểm") or contains(.,"Doi diem") or contains(.,"Đổi")]',
+  },
+
+  links: {
+    loyaltyFromProfile:
+      '//a[contains(@href,"/loyalty") or contains(.,"Loyalty program") or contains(.,"Điểm thưởng") or contains(.,"Diem thuong")]',
   },
 
   modal: {
-    redeemModal: '.ant-modal',
-    submitRedeem: '.ant-modal .ant-btn-primary',
-    closeModal: '.ant-modal-close',
+    redeemModal: ".ant-modal",
+    submitRedeem: ".ant-modal .ant-btn-primary",
   },
 
-  // Loyalty History elements
   history: {
-    typeFilter: '.ant-select',
-    timeline: '.ant-timeline',
-    historyEntry: '.ant-timeline-item',
-    pagination: '.ant-pagination',
+    timeline: ".ant-timeline, .ant-table",
+    historyEntry: ".ant-timeline-item, .ant-table-row",
   },
 
   messages: {
-    success: '.ant-message-success',
-    error: '.ant-message-error',
+    success: ".ant-message-success",
+    error: ".ant-message-error",
+    insufficient: "không đủ điểm",
   },
 
-  open() {
-    I.amOnPage('/loyalty');
-    I.waitForElement('body', 30);
-    I.waitForInvisible('.ant-spin', 30);
-    I.wait(3);
+  openFromProfileMenu() {
+    I.amOnPage("/profile");
+    I.waitInUrl("/profile", 30);
+    I.waitForElement("body", 30);
+    I.waitForElement(this.elements.loyaltyProgramText, 30);
+    I.see("Loyalty");
+    I.click(this.links.loyaltyFromProfile);
+    I.waitInUrl("/loyalty", 30);
+    I.waitForElement("body", 30);
+    I.wait(2);
   },
 
-  openHistory() {
-    I.amOnPage('/loyalty/history');
-    I.waitForElement('body', 30);
-    I.waitForInvisible('.ant-spin', 30);
-    I.wait(3);
+  openHistoryTab() {
+    I.click(this.tabs.history);
+    I.wait(2);
   },
 
-  clickRedeemPoints() {
-    I.click(this.buttons.redeemPoints);
-    I.waitForElement(this.modal.redeemModal, 10);
-  },
-
-  clickViewHistory() {
-    I.click(this.buttons.viewHistory);
-    I.wait(3);
-  },
-
-  filterHistoryByType(type) {
-    I.click(this.history.typeFilter);
-    I.wait(1);
-    I.click(`//div[contains(@class,"ant-select-item") and contains(.,"${type}")]`);
+  openRedeemTab() {
+    I.click(this.tabs.redeem);
     I.wait(2);
   },
 
   seeLoyaltyOverview() {
     I.seeElement(this.elements.totalPoints);
-  },
-
-  seeTier(tierName) {
-    I.see(tierName);
-  },
-
-  seePoints() {
-    I.seeElement(this.elements.totalPoints);
-  },
-
-  seeProgressBar() {
-    I.seeElement(this.elements.progressBar);
+    I.seeElement(this.elements.tierTag);
   },
 
   seeHistoryTimeline() {
     I.seeElement(this.history.timeline);
   },
 
-  seeHistoryEntry() {
-    I.seeElement(this.history.historyEntry);
+  seeTierBenefits() {
+    I.seeElement(this.elements.benefitsArea);
+  },
+
+  selectFirstVoucherAndRedeem() {
+    I.click('//button[contains(.,"Đổi") or contains(.,"Redeem")][1]');
+    I.waitForElement(this.modal.redeemModal, 10);
+    I.click(this.modal.submitRedeem);
+    I.wait(2);
+  },
+
+  selectHighestCostVoucher() {
+    I.click('(//button[contains(.,"Đổi") or contains(.,"Redeem")])[last()]');
+    I.waitForElement(this.modal.redeemModal, 10);
+  },
+
+  confirmRedeem() {
+    I.click(this.modal.submitRedeem);
+    I.wait(2);
+  },
+
+  seeRedeemResult() {
+    I.wait(2);
+    I.seeElement(`${this.messages.success}, ${this.messages.error}`);
+  },
+
+  seeInsufficientPointsMessage() {
+    I.wait(2);
+    I.see(this.messages.insufficient);
   },
 };
