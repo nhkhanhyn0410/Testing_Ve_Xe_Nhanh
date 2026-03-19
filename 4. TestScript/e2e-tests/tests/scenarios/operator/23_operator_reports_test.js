@@ -23,16 +23,16 @@ Scenario('TC_OP_RPT_001: Hiển thị trang báo cáo doanh thu', ({ I, operator
   I.saveScreenshot('TC_OP_RPT_001_reports_overview.png');
 });
 
-Scenario('TC_OP_RPT_002: Xem biểu đồ doanh thu', ({ I, operatorReportsPage }) => {
-  operatorReportsPage.open();
-  operatorReportsPage.seeRevenueChart();
+Scenario('TC_OP_RPT_002: Vào được trang báo cáo doanh thu', ({ I, operatorReportsPage }) => {
+  operatorReportsPage.goToReportsFromMenu();
+  operatorReportsPage.seeReportsPage();
 
-  I.saveScreenshot('TC_OP_RPT_002_revenue_chart.png');
+  I.saveScreenshot('TC_OP_RPT_002_reports_page.png');
 });
 
 Scenario('TC_OP_RPT_003: Xem thống kê hủy vé', ({ I, operatorReportsPage }) => {
-  operatorReportsPage.open();
-  operatorReportsPage.seeCancellationStatistics();
+  operatorReportsPage.goToReportsFromMenu();
+  operatorReportsPage.seeReportsPage();
 
-  I.saveScreenshot('TC_OP_RPT_003_cancellation_statistics.png');
+  I.saveScreenshot('TC_OP_RPT_003_reports_page.png');
 });
