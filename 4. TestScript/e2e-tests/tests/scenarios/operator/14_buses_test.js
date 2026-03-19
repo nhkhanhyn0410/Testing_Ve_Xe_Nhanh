@@ -4,7 +4,6 @@ Feature('Operator: Quản lý xe - CRUD, trạng thái (STT 14)');
 
 const operator = users.operator.valid;
 
-// Helper: Login operator → vào trang quản lý xe
 async function loginAndGoToBuses(I, operatorLoginPage, operatorBusesPage) {
   operatorLoginPage.open();
   operatorLoginPage.login(operator.email, operator.password);
@@ -17,9 +16,6 @@ Before(({ I }) => {
   I.clearCookie();
 });
 
-// ========================================================================================
-// TC_OP_BUS_001: Hiển thị danh sách xe
-// ========================================================================================
 Scenario('TC_OP_BUS_001: Hiển thị danh sách xe',
   async ({ I, operatorLoginPage, operatorBusesPage }) => {
     await loginAndGoToBuses(I, operatorLoginPage, operatorBusesPage);
@@ -30,9 +26,6 @@ Scenario('TC_OP_BUS_001: Hiển thị danh sách xe',
   }
 );
 
-// ========================================================================================
-// TC_OP_BUS_002: Thêm xe mới thành công (bao gồm tạo sơ đồ ghế)
-// ========================================================================================
 Scenario('TC_OP_BUS_002: Thêm xe mới thành công',
   async ({ I, operatorLoginPage, operatorBusesPage }) => {
     await loginAndGoToBuses(I, operatorLoginPage, operatorBusesPage);
@@ -45,9 +38,7 @@ Scenario('TC_OP_BUS_002: Thêm xe mới thành công',
   }
 );
 
-// ========================================================================================
-// TC_OP_BUS_003: Thêm xe với biển số trùng
-// ========================================================================================
+
 Scenario('TC_OP_BUS_003: Thêm xe với biển số trùng → lỗi',
   async ({ I, operatorLoginPage, operatorBusesPage }) => {
     await loginAndGoToBuses(I, operatorLoginPage, operatorBusesPage);
@@ -60,9 +51,6 @@ Scenario('TC_OP_BUS_003: Thêm xe với biển số trùng → lỗi',
   }
 );
 
-// ========================================================================================
-// TC_OP_BUS_004: Sửa thông tin xe
-// ========================================================================================
 Scenario('TC_OP_BUS_004: Sửa thông tin xe',
   async ({ I, operatorLoginPage, operatorBusesPage }) => {
     await loginAndGoToBuses(I, operatorLoginPage, operatorBusesPage);
@@ -77,9 +65,6 @@ Scenario('TC_OP_BUS_004: Sửa thông tin xe',
   }
 );
 
-// ========================================================================================
-// TC_OP_BUS_005: Thay đổi trạng thái xe (active → inactive)
-// ========================================================================================
 Scenario('TC_OP_BUS_005: Thay đổi trạng thái xe (active/inactive)',
   async ({ I, operatorLoginPage, operatorBusesPage }) => {
     await loginAndGoToBuses(I, operatorLoginPage, operatorBusesPage);
