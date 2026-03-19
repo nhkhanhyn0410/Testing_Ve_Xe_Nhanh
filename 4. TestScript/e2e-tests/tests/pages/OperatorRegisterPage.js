@@ -1,30 +1,31 @@
 const { I } = inject();
 
 module.exports = {
-
   fields: {
-    companyName: '//form[@name="operator-register"]//input[@id="operator-register_companyName"]',
-    email: '//form[@name="operator-register"]//input[@id="operator-register_email"]',
-    phone: '//form[@name="operator-register"]//input[@id="operator-register_phone"]',
-    businessLicense: '//form[@name="operator-register"]//input[@id="operator-register_businessLicense"]',
-    taxCode: '//form[@name="operator-register"]//input[@id="operator-register_taxCode"]',
-    password: '//form[@name="operator-register"]//input[@id="operator-register_password"]',
-    confirmPassword: '//form[@name="operator-register"]//input[@id="operator-register_confirmPassword"]',
+    companyName: "#operator-register_companyName",
+    email: "#operator-register_email",
+    phone: "#operator-register_phone",
+    businessLicense: "#operator-register_businessLicense",
+    taxCode: "#operator-register_taxCode",
+    password: "#operator-register_password",
+    confirmPassword: "#operator-register_confirmPassword",
   },
 
   buttons: {
-    submit: '//form[@name="operator-register"]//button[@type="submit"]',
+    submit: 'button[type="submit"]',
     loginLink: '//a[contains(@href,"/operator/login")]',
   },
 
   messages: {
-    error: '.ant-message-error',
-    success: '.ant-message-success',
+    error: ".ant-message-error",
+    success: ".ant-message-success",
   },
 
   open() {
-    I.amOnPage('/operator/register');
+    I.amOnPage("/operator/register");
+    I.waitInUrl("/operator/register", 30);
     I.waitForElement(this.fields.companyName, 30);
+    I.waitForElement(this.fields.email, 30);
   },
 
   fillCompanyName(name) {
@@ -71,14 +72,19 @@ module.exports = {
   },
 
   seeRegisterForm() {
+    I.waitForElement(this.fields.companyName, 30);
+    I.waitForElement(this.fields.email, 30);
+    I.waitForElement(this.fields.password, 30);
+    I.waitForElement(this.buttons.submit, 30);
     I.seeElement(this.fields.companyName);
     I.seeElement(this.fields.email);
     I.seeElement(this.fields.password);
+    I.seeElement(this.buttons.submit);
   },
 
   seeRegisterSuccess() {
     I.wait(3);
-    I.seeInCurrentUrl('/operator/login');
+    I.seeInCurrentUrl("/operator/login");
   },
 
   seeRegisterError(message) {

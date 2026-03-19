@@ -1,25 +1,26 @@
 const { I } = inject();
 
 module.exports = {
-
   fields: {
-    email: '//form[@name="operator-login"]//input[contains(@type,"text") or contains(@type,"email")]',
-    password: '//form[@name="operator-login"]//input[@type="password"]',
+    email: "#operator-login_email",
+    password: "#operator-login_password",
   },
 
   buttons: {
-    submit: '//form[@name="operator-login"]//button[@type="submit"]',
+    submit: 'button[type="submit"]',
     registerLink: '//a[contains(@href,"/operator/register")]',
   },
 
   messages: {
-    error: '.ant-message-error',
-    success: '.ant-message-success',
+    error: ".ant-message-error",
+    success: ".ant-message-success",
   },
 
   open() {
-    I.amOnPage('/operator/login');
+    I.amOnPage("/operator/login");
+    I.waitInUrl("/operator/login", 30);
     I.waitForElement(this.fields.email, 30);
+    I.waitForElement(this.fields.password, 30);
   },
 
   fillEmail(email) {
@@ -41,11 +42,14 @@ module.exports = {
   },
 
   loginWithValidOperator() {
-    const user = require('../data/users.json').operator.valid;
+    const user = require("../data/users.json").operator.valid;
     this.login(user.email, user.password);
   },
 
   seeLoginForm() {
+    I.waitForElement(this.fields.email, 30);
+    I.waitForElement(this.fields.password, 30);
+    I.waitForElement(this.buttons.submit, 30);
     I.seeElement(this.fields.email);
     I.seeElement(this.fields.password);
     I.seeElement(this.buttons.submit);
@@ -53,7 +57,7 @@ module.exports = {
 
   seeLoginSuccess() {
     I.wait(5);
-    I.seeInCurrentUrl('/operator');
+    I.seeInCurrentUrl("/operator");
   },
 
   seeLoginError(message) {

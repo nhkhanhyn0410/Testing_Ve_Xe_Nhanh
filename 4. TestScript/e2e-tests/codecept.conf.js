@@ -1,122 +1,126 @@
-const { setHeadlessWhen, setWindowSize } = require('@codeceptjs/configure');
+const { setHeadlessWhen, setWindowSize } = require("@codeceptjs/configure");
 
 setHeadlessWhen(process.env.HEADLESS);
 setWindowSize(1920, 1080);
 
 exports.config = {
-  tests: './tests/scenarios/**/*_test.js',
-  output: './output',
+  tests: "./tests/scenarios/**/*_test.js",
+  output: "./output",
 
   helpers: {
     Playwright: {
-      url: process.env.BASE_URL || 'https://ve-xe-nhanh-testing-frontend.vercel.app',
+      url:
+        process.env.BASE_URL ||
+        "https://ve-xe-nhanh-testing-frontend.vercel.app",
       show: true,
-      browser: process.env.BROWSER || 'chromium',
+      browser: process.env.BROWSER || "chromium",
       channel: process.env.CHANNEL || undefined,
       waitForTimeout: 30000,
       waitForAction: 800,
-      waitForNavigation: 'networkidle',
-      windowSize: '1920x1080',
+      waitForNavigation: "networkidle",
+      windowSize: "1920x1080",
     },
 
     REST: {
-      endpoint: process.env.API_URL || 'https://ve-xe-nhanh.onrender.com/api/v1',
+      endpoint:
+        process.env.API_URL || "https://ve-xe-nhanh.onrender.com/api/v1",
       defaultHeaders: {
-        'Content-Type': 'application/json'
-      }
+        "Content-Type": "application/json",
+      },
     },
 
-    JSONResponse: {}
+    JSONResponse: {},
   },
 
   include: {
-    I: './steps_file.js',
+    I: "./steps_file.js",
     // Customer
-    homePage: './tests/pages/HomePage.js',
-    loginPage: './tests/pages/LoginPage.js',
-    registerPage: './tests/pages/RegisterPage.js',
-    tripsPage: './tests/pages/TripsPage.js',
-    tripDetailPage: './tests/pages/TripDetailPage.js',
-    passengerInfoPage: './tests/pages/PassengerInfoPage.js',
-    bookingSuccessPage: './tests/pages/BookingSuccessPage.js',
-    myTicketsPage: './tests/pages/MyTicketsPage.js',
-    guestTicketLookupPage: './tests/pages/GuestTicketLookupPage.js',
-    cancelTicketPage: './tests/pages/CancelTicketPage.js',
-    complaintsPage: './tests/pages/ComplaintsPage.js',
-    complaintDetailPage: './tests/pages/ComplaintDetailPage.js',
-    profilePage: './tests/pages/ProfilePage.js',
-    loyaltyPage: './tests/pages/LoyaltyPage.js',
+    homePage: "./tests/pages/HomePage.js",
+    loginPage: "./tests/pages/LoginPage.js",
+    registerPage: "./tests/pages/RegisterPage.js",
+    tripsPage: "./tests/pages/TripsPage.js",
+    tripDetailPage: "./tests/pages/TripDetailPage.js",
+    passengerInfoPage: "./tests/pages/PassengerInfoPage.js",
+    bookingSuccessPage: "./tests/pages/BookingSuccessPage.js",
+    myTicketsPage: "./tests/pages/MyTicketsPage.js",
+    guestTicketLookupPage: "./tests/pages/GuestTicketLookupPage.js",
+    cancelTicketPage: "./tests/pages/CancelTicketPage.js",
+    complaintsPage: "./tests/pages/ComplaintsPage.js",
+    complaintDetailPage: "./tests/pages/ComplaintDetailPage.js",
+    profilePage: "./tests/pages/ProfilePage.js",
+    loyaltyPage: "./tests/pages/LoyaltyPage.js",
     // Operator
-    operatorLoginPage: './tests/pages/OperatorLoginPage.js',
-    operatorRegisterPage: './tests/pages/OperatorRegisterPage.js',
-    operatorRoutesPage: './tests/pages/OperatorRoutesPage.js',
-    operatorBusesPage: './tests/pages/OperatorBusesPage.js',
-    operatorEmployeesPage: './tests/pages/OperatorEmployeesPage.js',
-    operatorTripsPage: './tests/pages/OperatorTripsPage.js',
-    operatorVouchersPage: './tests/pages/OperatorVouchersPage.js',
-    operatorReportsPage: './tests/pages/OperatorReportsPage.js',
+    operatorLoginPage: "./tests/pages/OperatorLoginPage.js",
+    operatorRegisterPage: "./tests/pages/OperatorRegisterPage.js",
+    operatorRoutesPage: "./tests/pages/OperatorRoutesPage.js",
+    operatorBusesPage: "./tests/pages/OperatorBusesPage.js",
+    operatorEmployeesPage: "./tests/pages/OperatorEmployeesPage.js",
+    operatorTripsPage: "./tests/pages/OperatorTripsPage.js",
+    operatorVouchersPage: "./tests/pages/OperatorVouchersPage.js",
+    operatorReportsPage: "./tests/pages/OperatorReportsPage.js",
     // Trip Manager
-    tripManagerLoginPage: './tests/pages/TripManagerLoginPage.js',
-    tripManagerDashboardPage: './tests/pages/TripManagerDashboardPage.js',
-    qrScannerPage: './tests/pages/QRScannerPage.js',
-    activeTripPage: './tests/pages/ActiveTripPage.js',
+    tripManagerLoginPage: "./tests/pages/TripManagerLoginPage.js",
+    tripManagerDashboardPage: "./tests/pages/TripManagerDashboardPage.js",
+    qrScannerPage: "./tests/pages/QRScannerPage.js",
+    activeTripPage: "./tests/pages/ActiveTripPage.js",
     // Admin
-    adminLoginPage: './tests/pages/AdminLoginPage.js',
-    adminOperatorManagementPage: './tests/pages/AdminOperatorManagementPage.js',
-    adminUserManagementPage: './tests/pages/AdminUserManagementPage.js',
-    adminComplaintManagementPage: './tests/pages/AdminComplaintManagementPage.js',
-    adminContentManagementPage: './tests/pages/AdminContentManagementPage.js',
+    adminLoginPage: "./tests/pages/AdminLoginPage.js",
+    adminOperatorManagementPage: "./tests/pages/AdminOperatorManagementPage.js",
+    adminUserManagementPage: "./tests/pages/AdminUserManagementPage.js",
+    adminComplaintManagementPage:
+      "./tests/pages/AdminComplaintManagementPage.js",
+    adminContentManagementPage: "./tests/pages/AdminContentManagementPage.js",
   },
 
   plugins: {
     screenshotOnFail: {
-      enabled: true
+      enabled: true,
     },
     retryFailedStep: {
       enabled: true,
-      retries: 2
+      retries: 2,
     },
     autoDelay: {
       enabled: true,
-      delayAfter: 200
+      delayAfter: 200,
     },
     allure: {
       enabled: true,
-      require: '@codeceptjs/allure-legacy',
-      outputDir: './output/allure-results'
-    }
+      require: "@codeceptjs/allure-legacy",
+      outputDir: "./output/allure-results",
+    },
   },
 
   mocha: {
     reporterOptions: {
-      reportDir: './output',
-      reportFilename: 'report',
+      reportDir: "./output",
+      reportFilename: "report",
       overwrite: true,
       html: true,
       json: false,
-    }
+    },
   },
 
   stepTimeout: 60000,
 
-  name: 'vexenhanh-e2e-tests',
+  name: "vexenhanh-e2e-tests",
 
   multiple: {
     parallel: {
       chunks: 2,
-      browsers: ['chromium']
+      browsers: ["chromium"],
     },
     smoke: {
-      grep: '@smoke',
-      browsers: ['chromium']
+      grep: "@smoke",
+      browsers: ["chromium"],
     },
     multibrowser: {
       chunks: 3,
       browsers: [
-        { browser: 'chromium' },
-        { browser: 'firefox' },
-        { browser: 'chromium', channel: 'msedge' },
-      ]
-    }
-  }
-}
+        { browser: "chromium" },
+        { browser: "firefox" },
+        { browser: "chromium", channel: "msedge" },
+      ],
+    },
+  },
+};
