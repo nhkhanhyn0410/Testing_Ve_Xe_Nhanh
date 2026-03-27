@@ -35,6 +35,12 @@ module.exports = {
     I.waitForElement(this.fields.phone, 30);
   },
 
+  seeLookupForm() {
+    I.seeElement(this.fields.phone);
+    I.seeElement(this.fields.email);
+    I.seeElement(this.buttons.continue);
+  },
+
   fillPhone(phone) {
     I.fillField(this.fields.phone, phone);
   },

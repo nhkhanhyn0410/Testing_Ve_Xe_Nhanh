@@ -50,12 +50,12 @@ module.exports = {
     I.click(this.buttons.submit);
   },
 
-  register(name, email, phone, password) {
+  register(name, email, phone, password, confirmPassword = password) {
     this.fillName(name);
     this.fillEmail(email);
     this.fillPhone(phone);
     this.fillPassword(password);
-    this.fillConfirmPassword(password);
+    this.fillConfirmPassword(confirmPassword);
     this.clickSubmit();
   },
 
@@ -65,18 +65,6 @@ module.exports = {
     I.seeElement(this.fields.phone);
     I.seeElement(this.fields.password);
     I.seeElement(this.fields.confirmPassword);
-  },
-
-  seeRegisterSuccess() {
-    I.wait(3);
-    I.seeInCurrentUrl('/login');
-  },
-
-  seeRegisterError(message) {
-    I.wait(3);
-    if (message) {
-      I.see(message);
-    }
   },
 
   clickLoginLink() {
